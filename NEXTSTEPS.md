@@ -123,6 +123,50 @@ script rather than CI.)
 
 ---
 
+## Appendix C — display-correctness sweep (July 2026, third pass)
+
+A dedicated bug hunt through every emitted map, prompted by "make sure
+everything is displaying properly." Two real, confirmed-in-browser bugs found
+and fixed, both now locked in by smoke-test assertions:
+
+1. **Mobile layout was fully broken.** The data-map template's info panel and
+   control drawer are two independently absolutely-positioned corner boxes
+   with fixed pixel widths (330px + 268px) and no responsive breakpoint —
+   verified in-browser to fully overlap on any viewport under ~625px wide
+   (i.e., every phone). A missing `box-sizing:border-box` reset compounded it,
+   making padding inflate elements past their declared `max-width`/`max-height`.
+   The journey template had the same problem across four corner boxes
+   (`#ctl`/`.legend`/`#doubt`/`#story`). Fixed with a `@media (max-width:760px)`
+   breakpoint that stacks each vh-capped and independently scrollable, plus the
+   missing box-sizing reset. Network's explorer already had a `max-width:86vw`
+   clamp and needed no fix. Verified overlap-free at 320/375/400px widths.
+2. **Diacritics were silently dropped from map labels.** deck.gl 9.0.33's
+   TextLayer ignores `characterSet:"auto"` (which the fix's first attempt used)
+   and falls back to a plain-ASCII glyph set, so "Córdoba", "Kraków", and
+   "Třeboň" rendered with missing/blank characters in their on-map labels
+   (story-panel and tooltip text, which are plain HTML, were unaffected).
+   Fixed with an explicit ASCII + Latin-1 Supplement + Latin Extended-A/B
+   character range across all three templates.
+
+Also removed a harmless dead reference (`t.accentRGB`, never defined in any
+theme, always fell through to the correct fallback) found in passing.
+
+**Method note:** this pass's key lesson was that `preview_resize` +
+`location.href` navigation doesn't reliably re-evaluate CSS media queries in
+this tool — always `preview_resize` *then* `location.reload(true)` before
+reading computed styles, or measurements reflect the previous viewport. The
+`preview_console_logs` buffer also accumulates/duplicates rather than
+reporting fresh-since-last-check; a single test `console.warn()` reappeared
+4×, so a stale warning is not evidence of a live bug — restart the preview
+server for a clean read when a warning's provenance is in doubt. Screenshots
+still time out (confirmed root cause this pass: the preview tab reports
+`document.hidden === true`, which pauses requestAnimationFrame — the same
+reason a live PNG-export click didn't complete in-sandbox; the code path
+itself checked out correct on inspection, and a normal visible browser tab
+is unaffected).
+
+---
+
 ## Appendix B — what the gallery sprint shipped (July 2026, second pass)
 
 1. **25 new maps** (43 prototypes total): 7 theme maps, 8 figure maps, 6 region
