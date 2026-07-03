@@ -134,6 +134,11 @@ function basegeoLayers(){
   ];
 }
 
+// Place names carry diacritics (Kraków, Třeboň…) that deck.gl's TextLayer
+// default glyph set (plain ASCII) silently drops; "auto" is not honoured by
+// this deck.gl build, so cover ASCII + Latin-1 Supplement + Latin Extended-A/B.
+function charRange(a,b){ return Array.from({length:b-a+1},(_,i)=>String.fromCodePoint(a+i)); }
+const LABEL_CHARS=[...charRange(32,126),...charRange(160,591)];
 function lerp(a,b,t){return [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t];}
 function isUncertain(s){return s && (s.evidence==="inferred"||s.evidence==="approximate");}
 function legUncertain(s){return s && (s.leg_evidence==="inferred"||s.leg_evidence==="approximate");}
@@ -182,7 +187,8 @@ function makeLayers(){
   if(STATE.idx>=0){const cur=J.stops[STATE.idx];
     L.push(new deck.TextLayer({id:"lbl",data:[cur],getPosition:d=>[d.lon,d.lat],getText:d=>d.place,
       getSize:15,getColor:t.ink,getPixelOffset:[0,-18],fontFamily:"Cinzel, Georgia, serif",
-      outlineWidth:3,outlineColor:THEMES[STATE.theme].page==="#0e0f12"?[14,15,18]:[245,243,238],fontSettings:{sdf:true},getAlignmentBaseline:"bottom"}));}
+      outlineWidth:3,outlineColor:THEMES[STATE.theme].page==="#0e0f12"?[14,15,18]:[245,243,238],fontSettings:{sdf:true},getAlignmentBaseline:"bottom",
+      characterSet:LABEL_CHARS}));}
   return L;
 }
 function render(){overlay.setProps({layers:makeLayers()});}

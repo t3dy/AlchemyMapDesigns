@@ -654,10 +654,16 @@ function makeLayers(){
     getFillColor:d=>[...colorOf(d),Math.round(255*STATE.opacity)],getLineColor:(STATE.theme==="noir"||STATE.theme==="lapis")?[16,22,38,230]:[255,255,255,230],lineWidthMinPixels:1.2,stroked:true,pickable:true,
     updateTriggers:{getFillColor:[STATE.theme,STATE.colorBy,STATE.opacity],getRadius:[STATE.pointScale]}}));
   if(STATE.layers.labels) L.push(new deck.TextLayer({id:"labels",data:pts,getPosition:d=>[d.lon,d.lat],getText:d=>d.name,
-    getSize:12,getColor:hexish(t.ink),getPixelOffset:[0,-14],fontFamily:"Georgia, serif",outlineWidth:2,outlineColor:hexish(t.page),fontSettings:{sdf:true},getAlignmentBaseline:"bottom"}));
+    getSize:12,getColor:hexish(t.ink),getPixelOffset:[0,-14],fontFamily:"Georgia, serif",outlineWidth:2,outlineColor:hexish(t.page),fontSettings:{sdf:true},getAlignmentBaseline:"bottom",
+    characterSet:LABEL_CHARS}));
   return L;
 }
 function hexish(h){ const m=h.replace("#",""); return [parseInt(m.substr(0,2),16),parseInt(m.substr(2,2),16),parseInt(m.substr(4,2),16)]; }
+// Place names carry diacritics (Córdoba, Kraków, Třeboň…) that deck.gl's
+// TextLayer default glyph set (plain ASCII) silently drops. Cover ASCII +
+// Latin-1 Supplement + Latin Extended-A/B so accented labels render whole.
+function charRange(a,b){ return Array.from({length:b-a+1},(_,i)=>String.fromCodePoint(a+i)); }
+const LABEL_CHARS=[...charRange(32,126),...charRange(160,591)];
 
 function render(){ overlay.setProps({layers:makeLayers()}); }
 

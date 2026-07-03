@@ -56,6 +56,11 @@ const THEMES={
 const TYPE_COLORS={ "patron-of":[176,92,53],"collaborated":[60,130,100],"cited":[63,111,143],"collected":[120,70,150],
   "corresponded":[40,120,135],"influenced":[150,110,40],"polemicized-against":[180,55,60],"taught":[90,140,80],"studied-under":[110,100,55] };
 function tc(t){return TYPE_COLORS[t]||[120,120,120];}
+// Figure names may carry diacritics that deck.gl's TextLayer default glyph
+// set (plain ASCII) silently drops; "auto" is not honoured by this deck.gl
+// build, so cover ASCII + Latin-1 Supplement + Latin Extended-A/B explicitly.
+function charRange(a,b){ return Array.from({length:b-a+1},(_,i)=>String.fromCodePoint(a+i)); }
+const LABEL_CHARS=[...charRange(32,126),...charRange(160,591)];
 
 const STATE={subjectIdx:0, theme:"atlas", survive:false, sel:null};
 let map, overlay, S, nodeById;
@@ -121,6 +126,7 @@ function makeLayers(){
     getSize:13,getColor:n=>{const dim=adj&&!adj.has(n.id);return dim?[t.ink[0],t.ink[1],t.ink[2],90]:[...t.ink,255];},
     getPixelOffset:[0,-16],fontFamily:"Cinzel, Georgia, serif",outlineWidth:3,
     outlineColor:STATE.theme==="noir"?[14,15,18]:[245,243,238],fontSettings:{sdf:true},getAlignmentBaseline:"bottom",
+    characterSet:LABEL_CHARS,
     updateTriggers:{getColor:[STATE.sel,STATE.theme,STATE.survive]}}));
   return L;
 }

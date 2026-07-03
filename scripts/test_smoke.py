@@ -55,6 +55,10 @@ def html_is_sound(out, expect_boundaries=None):
     # and (b) a mobile breakpoint that re-stacks them. Never let either regress.
     assert "box-sizing:border-box" in out, "no box-sizing reset — mobile stacking math will be wrong"
     assert "@media (max-width:760px)" in out, "no mobile breakpoint — #panel/#controls overlap under ~625px wide"
+    # place-name labels (Córdoba, Kraków…) need an explicit glyph range — deck.gl
+    # 9.0.33 silently ignores characterSet:"auto" and drops any accented letter
+    assert 'characterSet:LABEL_CHARS' in out, "TextLayer missing the diacritics character-set fix"
+    assert 'characterSet:"auto"' not in out, "TextLayer using characterSet:'auto', which this deck.gl build ignores"
 
 
 def main():
@@ -125,6 +129,8 @@ def main():
             assert "bg-land" in out and '"basegeo"' in out, f"{p.name}: base geography not embedded"
             assert "demotiles" not in out, f"{p.name}: CDN basemap dependency"
             assert "box-sizing:border-box" in out, f"{p.name}: no box-sizing reset"
+            assert 'characterSet:LABEL_CHARS' in out, f"{p.name}: TextLayer missing the diacritics character-set fix"
+            assert 'characterSet:"auto"' not in out, f"{p.name}: TextLayer using characterSet:'auto', which this deck.gl build ignores"
     check("journey/network prototypes embed geography", curated_protos)
 
     # ---- journey prototypes stack #ctl/.legend/#doubt/#story on mobile ----
