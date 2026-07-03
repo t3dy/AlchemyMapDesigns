@@ -48,6 +48,13 @@ def html_is_sound(out, expect_boundaries=None):
     assert "demotiles" not in out, "CDN basemap dependency crept back in"
     if expect_boundaries:
         assert '"boundaries": {' in out or '"boundaries":{' in out, "boundaries not embedded"
+    # mobile layout: #panel/#controls (data maps) are independently absolutely-
+    # positioned corner boxes with fixed pixel widths — verified by hand in a
+    # real browser (375/320px viewports) to fully overlap without both (a) a
+    # box-sizing:border-box reset so max-height/width arithmetic is accurate,
+    # and (b) a mobile breakpoint that re-stacks them. Never let either regress.
+    assert "box-sizing:border-box" in out, "no box-sizing reset — mobile stacking math will be wrong"
+    assert "@media (max-width:760px)" in out, "no mobile breakpoint — #panel/#controls overlap under ~625px wide"
 
 
 def main():
@@ -117,7 +124,17 @@ def main():
             out = p.read_text(encoding="utf-8")
             assert "bg-land" in out and '"basegeo"' in out, f"{p.name}: base geography not embedded"
             assert "demotiles" not in out, f"{p.name}: CDN basemap dependency"
+            assert "box-sizing:border-box" in out, f"{p.name}: no box-sizing reset"
     check("journey/network prototypes embed geography", curated_protos)
+
+    # ---- journey prototypes stack #ctl/.legend/#doubt/#story on mobile ----
+    # (verified by hand in-browser at 320-400px: these four independently
+    # absolutely-positioned corner boxes overlap without this breakpoint)
+    def journey_mobile_layout():
+        for p in (ROOT / "prototypes").glob("journey-*.html"):
+            out = p.read_text(encoding="utf-8")
+            assert "@media (max-width:760px)" in out, f"{p.name}: no mobile breakpoint"
+    check("journey prototypes have a mobile layout", journey_mobile_layout)
 
     # ---- curated journey data obeys its evidence rules ----
     for jp in sorted((ROOT / "data").glob("journey-*.json")):

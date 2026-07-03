@@ -15,6 +15,7 @@
     --accent:#7a4a25; --chip:#f1efe9; --font:"Spectral",Georgia,serif; --head:"Spectral",Georgia,serif;
     --shadow:0 12px 34px rgba(40,30,15,.18);
   }
+  *{box-sizing:border-box;}
   html,body{margin:0;height:100%;font-family:var(--font);color:var(--ink);background:var(--page);}
   #map{position:absolute;inset:0;background:var(--page);}
   .card{background:var(--panel);border:1px solid var(--panel-bd);border-radius:12px;box-shadow:var(--shadow);}
@@ -59,6 +60,19 @@
   .maplibregl-popup-content{font-family:var(--font);max-width:300px;border-radius:10px;}
   body.ui-min #panel,body.ui-min #controls{display:none;}
   body.ui-min #timebar{bottom:10px;}
+  /* mobile: panel + controls are both fixed-width absolutely-positioned boxes
+     that collide on any viewport under ~625px wide. Stack them instead, each
+     capped to a fraction of viewport height (they already scroll internally),
+     and let the time bar wrap onto two rows rather than overflow sideways. */
+  @media (max-width:760px){
+    #panel{left:8px;right:8px;top:8px;max-width:none;width:auto;max-height:26vh;}
+    #controls{left:8px;right:8px;top:calc(26vh + 20px);width:auto;
+      max-height:calc(100vh - 26vh - 118px);}
+    #timebar{left:8px;right:8px;bottom:8px;width:auto;transform:none;
+      flex-wrap:wrap;justify-content:center;row-gap:6px;}
+    #timebar input[type="range"]{flex:1 1 100%;order:3;}
+    #yearLabel{min-width:0;font-size:12px;}
+  }
 </style>
 </head>
 <body>
@@ -86,6 +100,8 @@
         <option value="copperplate">Copperplate Engraving</option>
         <option value="illuminated">Illuminated Manuscript</option>
         <option value="noir">Alchemical Noir</option>
+        <option value="woodcut">Woodcut &amp; Rubric</option>
+        <option value="lapis">Lapis &amp; Gold</option>
       </select></div>
     <div class="field"><label>Typeface</label>
       <select id="selFont">
@@ -146,6 +162,14 @@ const THEMES = {
     accent:"#c9a24b", chip:"#20242c", font:'"EB Garamond",Georgia,serif', head:'"Cinzel",Georgia,serif',
     water:"#11141a", land:"#1b1f27", border:"#333a44",
     palette:[[201,162,75],[180,200,210],[120,200,170],[200,120,160],[120,160,220],[220,150,90],[150,210,120],[230,120,120],[120,200,210],[200,180,120]] },
+  woodcut: { page:"#f6efdc", ink:"#171310", muted:"#5f564a", panel:"#faf5e6", panelBd:"#171310",
+    accent:"#a3231b", chip:"#ece3ca", font:'"IM Fell English",Georgia,serif', head:'"IM Fell English",Georgia,serif',
+    water:"#e4ddc6", land:"#f3ecd6", border:"#171310",
+    palette:[[23,19,16],[163,35,27],[70,60,50],[120,30,25],[40,35,30],[140,80,30],[90,80,70],[190,60,45],[55,48,40],[110,95,80]] },
+  lapis: { page:"#101a30", ink:"#e8e4d4", muted:"#8d99b8", panel:"#16233f", panelBd:"#2c3d63",
+    accent:"#d4af37", chip:"#1c2c4e", font:'"EB Garamond",Georgia,serif', head:'"Cinzel",Georgia,serif',
+    water:"#0d1526", land:"#1d2c4f", border:"#3b4f7d",
+    palette:[[212,175,55],[130,180,220],[220,220,230],[110,200,190],[220,140,100],[170,150,220],[240,200,120],[130,220,150],[230,120,140],[180,190,210]] },
 };
 
 // ---------- state ----------
@@ -256,7 +280,7 @@ function makeLayers(){
     getSourceColor:[...t.accentRGB||hexish(t.accent),120],getTargetColor:[...hexish(t.accent),210],getWidth:STATE.arcWidth,getHeight:0.4,pickable:true}));
   if(STATE.layers.points) L.push(new deck.ScatterplotLayer({id:"points",data:pts,getPosition:d=>[d.lon,d.lat],
     getRadius:d=>(5+Math.sqrt(d.vcount)*3)*STATE.pointScale,radiusUnits:"pixels",radiusMinPixels:4,
-    getFillColor:d=>[...colorOf(d),Math.round(255*STATE.opacity)],getLineColor:STATE.theme==="noir"?[20,22,26,230]:[255,255,255,230],lineWidthMinPixels:1.2,stroked:true,pickable:true,
+    getFillColor:d=>[...colorOf(d),Math.round(255*STATE.opacity)],getLineColor:(STATE.theme==="noir"||STATE.theme==="lapis")?[16,22,38,230]:[255,255,255,230],lineWidthMinPixels:1.2,stroked:true,pickable:true,
     updateTriggers:{getFillColor:[STATE.theme,STATE.colorBy,STATE.opacity],getRadius:[STATE.pointScale]}}));
   if(STATE.layers.labels) L.push(new deck.TextLayer({id:"labels",data:pts,getPosition:d=>[d.lon,d.lat],getText:d=>d.name,
     getSize:12,getColor:hexish(t.ink),getPixelOffset:[0,-14],fontFamily:"Georgia, serif",outlineWidth:2,outlineColor:hexish(t.page),fontSettings:{sdf:true},getAlignmentBaseline:"bottom"}));

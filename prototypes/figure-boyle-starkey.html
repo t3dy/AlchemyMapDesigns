@@ -15,6 +15,7 @@
     --accent:#7a4a25; --chip:#f1efe9; --font:"Spectral",Georgia,serif; --head:"Spectral",Georgia,serif;
     --shadow:0 12px 34px rgba(40,30,15,.18);
   }
+  *{box-sizing:border-box;}
   html,body{margin:0;height:100%;font-family:var(--font);color:var(--ink);background:var(--page);}
   #map{position:absolute;inset:0;background:var(--page);}
   .card{background:var(--panel);border:1px solid var(--panel-bd);border-radius:12px;box-shadow:var(--shadow);}
@@ -59,6 +60,19 @@
   .maplibregl-popup-content{font-family:var(--font);max-width:300px;border-radius:10px;}
   body.ui-min #panel,body.ui-min #controls{display:none;}
   body.ui-min #timebar{bottom:10px;}
+  /* mobile: panel + controls are both fixed-width absolutely-positioned boxes
+     that collide on any viewport under ~625px wide. Stack them instead, each
+     capped to a fraction of viewport height (they already scroll internally),
+     and let the time bar wrap onto two rows rather than overflow sideways. */
+  @media (max-width:760px){
+    #panel{left:8px;right:8px;top:8px;max-width:none;width:auto;max-height:26vh;}
+    #controls{left:8px;right:8px;top:calc(26vh + 20px);width:auto;
+      max-height:calc(100vh - 26vh - 118px);}
+    #timebar{left:8px;right:8px;bottom:8px;width:auto;transform:none;
+      flex-wrap:wrap;justify-content:center;row-gap:6px;}
+    #timebar input[type="range"]{flex:1 1 100%;order:3;}
+    #yearLabel{min-width:0;font-size:12px;}
+  }
 </style>
 </head>
 <body>

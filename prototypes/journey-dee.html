@@ -43,6 +43,17 @@
   .legend .ln{width:26px;height:0;border-top:2px solid var(--gold);}
   .legend .ln.dash{border-top:2px dashed var(--gold);}
   body.ui-min #ctl{display:none;}
+  /* mobile: #ctl (top-left), #doubt (top-right, centerpiece mode), .legend
+     (bottom-right), and #story (bottom-left) are four independently-positioned
+     corner boxes that only avoid each other because desktop viewports are wide.
+     Stack them in a single left column instead, so nothing depends on how much
+     text a given journey's title/story/gap-list happens to contain. */
+  @media (max-width:760px){
+    #ctl{left:8px;right:8px;top:8px;width:auto;max-height:24vh;overflow-y:auto;}
+    .legend{left:8px;right:auto;bottom:auto;top:calc(24vh + 16px);}
+    #doubt{left:8px;right:8px;top:calc(24vh + 96px);width:auto;max-height:22vh;overflow-y:auto;}
+    #story{left:8px;right:8px;bottom:8px;width:auto;max-height:32vh;overflow-y:auto;}
+  }
 </style>
 </head>
 <body>
