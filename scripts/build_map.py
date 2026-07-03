@@ -648,7 +648,7 @@ function makeLayers(){
     pickable:true, updateTriggers:{getLineColor:[STATE.theme]}}));
   if(STATE.layers.heatmap) L.push(new deck.HeatmapLayer({id:"heat",data:pts,getPosition:d=>[d.lon,d.lat],getWeight:d=>d.vcount,radiusPixels:45,intensity:1,threshold:0.05}));
   if(STATE.layers.arcs) L.push(new deck.ArcLayer({id:"flows",data:visibleArcs(),getSourcePosition:d=>d.from,getTargetPosition:d=>d.to,
-    getSourceColor:[...t.accentRGB||hexish(t.accent),120],getTargetColor:[...hexish(t.accent),210],getWidth:STATE.arcWidth,getHeight:0.4,pickable:true}));
+    getSourceColor:[...hexish(t.accent),120],getTargetColor:[...hexish(t.accent),210],getWidth:STATE.arcWidth,getHeight:0.4,pickable:true}));
   if(STATE.layers.points) L.push(new deck.ScatterplotLayer({id:"points",data:pts,getPosition:d=>[d.lon,d.lat],
     getRadius:d=>(5+Math.sqrt(d.vcount)*3)*STATE.pointScale,radiusUnits:"pixels",radiusMinPixels:4,
     getFillColor:d=>[...colorOf(d),Math.round(255*STATE.opacity)],getLineColor:(STATE.theme==="noir"||STATE.theme==="lapis")?[16,22,38,230]:[255,255,255,230],lineWidthMinPixels:1.2,stroked:true,pickable:true,
