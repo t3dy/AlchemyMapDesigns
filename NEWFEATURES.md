@@ -86,12 +86,27 @@ colour-by re-skins instantly.
 
 ## 4. Visual layers
 
-- **Base geography** *(new)* — every map embeds real coastlines, land, lakes,
+- **Terrain colour & shaded relief** *(new)* — every map now carries a real
+  physical-geography texture underneath its vector coastlines: hypsometric
+  tinting (green lowlands, tan/brown uplands, pale high ground) plus actual
+  shaded relief, so you can see the Alps, the Atlas Mountains, the edge of the
+  Himalaya. Source: *Natural Earth I with Shaded Relief and Water* (public
+  domain), cached locally and cropped per map by `scripts/fetch_relief.py` +
+  `build_map.py`'s `load_relief_crop()`. Tinted per theme via deck.gl's
+  BitmapLayer (`desaturate`/`tintColor`) — the same photographic texture reads
+  as parchment under Illuminated, near-monochrome engraving under Woodcut, a
+  cool night register under Noir — so switching themes re-skins the land
+  itself, not just the flat colour underneath it. All three engines (data
+  maps, journeys, the network explorer) carry it; network crops per subject.
+  Falls back gracefully to a flat themed land fill if Pillow or the cached
+  master image isn't available at build time.
+- **Base geography** — every map embeds real coastlines, land, lakes,
   and major rivers (Natural Earth, slimmed to ~700 KB by
   `scripts/fetch_basegeo.py`, themed to the active aesthetic). The sea is the
-  canvas; the land is drawn on it. This replaced the demotiles CDN basemap
-  entirely — maps now *look like maps* even offline, and there is no external
-  style dependency left.
+  canvas; the land is drawn on it (an outline only where relief is present, so
+  the photographic texture shows through). This replaced the demotiles CDN
+  basemap entirely — maps now *look like maps* even offline, and there is no
+  external style dependency left for the vector layers.
 - **Points** — places, sized by event count, coloured by category.
 - **Transmission arcs** — knowledge in motion (person itineraries between centres).
 - **Labels** — place names (deck.gl TextLayer), now **on by default** in every
@@ -281,13 +296,13 @@ honestly, actor/analyst distinction preserved.
 
 | Kind | Files |
 |------|-------|
-| Engines | `build_map.py`, `build_journey.py`, `build_network.py`, `build_all.py`, `build_showcase.py`, `build_gallery.py`, `list_vocab.py` |
-| Data tooling | `fetch_boundaries.py` (period borders cache) · `test_smoke.py` (regression suite) |
+| Engines | `build_map.py`, `build_journey.py`, `build_network.py`, `build_all.py`, `build_showcase.py`, `build_scholarship.py`, `build_gallery.py`, `list_vocab.py` |
+| Data tooling | `fetch_boundaries.py` (period borders) · `fetch_basegeo.py` (coastlines/lakes/rivers) · `fetch_relief.py` (terrain colour/shaded relief) · `test_smoke.py` (60-check regression suite) |
 | Skills | `/buildmap`, `/journey`, `/network` |
-| Curated data | 3 journeys (`journey-bruno/paracelsus/dee.json`), `networks.json` (6 subjects), `data/boundaries/` (24 slimmed years, 100–1800 CE) |
-| Generated maps | 43 HTML in `prototypes/` (6 eras + 11 centuries + 7 themes + 8 figures + 6 regions + 3 journeys + network explorer + example) |
-| Specs | `specs/mapspec.schema.json` + 1 example + 17 generated + 21 showcase |
-| Presentation | `gallery/` (48 cards + 48 map pages + docs) · `tour/index.html` (9 chapters) + `tour/manifest.json` |
+| Curated data | 3 journeys (`journey-bruno/paracelsus/dee.json`), `networks.json` (6 subjects), `data/boundaries/` (24 slimmed years), `data/basegeo/` (land/lakes/rivers), `data/relief/` (terrain master) |
+| Generated maps | 52 HTML in `prototypes/` (6 eras + 11 centuries + 7 themes + 8 figures + 6 regions + 7 scholarship + 3 examples + 3 journeys + network explorer) |
+| Specs | `specs/mapspec.schema.json` + 3 examples + 17 generated + 21 showcase + 7 scholarship |
+| Presentation | `gallery/` (57 cards + 57 map pages + docs) · `tour/index.html` (9 chapters) + `tour/manifest.json` |
 | Docs | this file · `AUDIT.md` · `NEXTSTEPS.md` · `TOOLKIT.md` · `MANUAL.md` · `research/MAPTYPES_FRAMEWORK.md` · `README.md` · `CAPABILITIES.md` |
 
 ## Testing

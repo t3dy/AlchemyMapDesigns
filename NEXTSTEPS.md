@@ -123,6 +123,44 @@ script rather than CI.)
 
 ---
 
+## Appendix D — real terrain colour + shaded relief (July 2026, fourth pass)
+
+Prompted by feedback that the maps "still look very abstract" and should look
+more like an atlas plate or a documentary's travel maps. Previously every map's
+land was a single flat colour; now every map embeds real physical-geography
+imagery underneath its vector coastlines:
+
+1. **`scripts/fetch_relief.py`** downloads *Natural Earth I with Shaded Relief
+   and Water* (public domain, ~88 MB zipped, 10800×5400px globally), crops to
+   the project window, and caches a shared master (`data/relief/world_relief.jpg`,
+   ~750 KB) — the same "cache once, embed slices" pattern as the boundaries
+   and basegeo caches.
+2. **`build_map.py`'s `load_relief_crop(bbox)`** re-crops a per-map slice from
+   that master at build time: padded to the map's bbox (or derived from point/
+   node/stop coordinates when no bbox is set), **aspect-ratio-equalized** (a
+   real bug caught mid-pass: a correspondence network stretching London↔Kraków
+   but only ~3° tall was cropping a near-invisible sliver — fixed by padding
+   the short axis out to a max 2.2:1 ratio), downsampled to a max dimension,
+   and base64-embedded as a JPEG. Degrades gracefully to a flat land fill if
+   Pillow or the cache is missing — the one exception to this toolkit's
+   "stdlib only" build-time promise, and it's isolated to one optional path.
+3. **Per-theme tinting** via deck.gl `BitmapLayer`'s `desaturate`/`tintColor`:
+   the *same* photographic texture reads as parchment-gold under Illuminated,
+   near-monochrome engraving under Woodcut, cool and dark under Noir — so
+   switching themes re-skins the terrain itself, not just a flat colour under it.
+4. Wired into **all three engines** (data maps, journeys, the network explorer
+   — which crops separately per subject, since one file serves six
+   constellations with different geographic footprints).
+5. Verified via native `Image.onload` + 2D canvas pixel sampling (bypassing
+   WebGL, which the sandbox can't render) across a world-scope era map, a
+   regional journey, and all six network subjects — real, varied colour
+   (ocean blue, green lowland, tan desert, olive mountain shading) at correct
+   geographic bounds, and correct per-theme desaturate/tint values threading
+   through theme switches. Smoke suite grew to 60 checks (relief-cache
+   presence/size, per-file size ceiling, per-theme layer wiring).
+
+---
+
 ## Appendix C — display-correctness sweep (July 2026, third pass)
 
 A dedicated bug hunt through every emitted map, prompted by "make sure

@@ -175,6 +175,81 @@ BASEGEO_DIR = Path(__file__).resolve().parents[1] / "data" / "basegeo"
 _BASEGEO_CACHE = None
 
 
+RELIEF_PATH = Path(__file__).resolve().parents[1] / "data" / "relief" / "world_relief.jpg"
+RELIEF_WINDOW = (-30.0, 8.0, 80.0, 72.0)  # must match fetch_relief.py's WINDOW
+_RELIEF_MASTER = None
+
+
+def load_relief_crop(bbox, max_px=900, pad_frac=0.15):
+    """Crop + re-encode a slice of the cached terrain-colour/shaded-relief master
+    for one map's bbox — real hypsometric tinting and shaded relief (Natural
+    Earth I), so the map reads like an atlas plate instead of a flat abstraction.
+    Returns {"data_uri": ..., "bounds": [w,s,e,n]} or None if no cache exists."""
+    global _RELIEF_MASTER
+    if _RELIEF_MASTER is None:
+        if not RELIEF_PATH.exists():
+            _RELIEF_MASTER = False
+            return None
+        try:
+            from PIL import Image
+        except ImportError:
+            _RELIEF_MASTER = False
+            return None
+        _RELIEF_MASTER = Image.open(RELIEF_PATH)
+        _RELIEF_MASTER.load()
+    if _RELIEF_MASTER is False:
+        return None
+    from PIL import Image
+    import base64, io
+
+    W, S, E, N = RELIEF_WINDOW
+    iw, ih = _RELIEF_MASTER.size
+    w, s, e, n = bbox
+    padx, pady = max((e - w) * pad_frac, 0.5), max((n - s) * pad_frac, 0.5)
+    w, e = w - padx, e + padx
+    s, n = s - pady, n + pady
+    # Equalize aspect ratio: data that's mostly spread along one axis (e.g. a
+    # correspondence network stretching London-to-Kraków but only ~3° tall)
+    # would otherwise crop a wafer-thin sliver — the map viewport shows more
+    # of the short axis than the raw bbox once fitBounds normalizes to the
+    # container's aspect ratio, so pad the short axis out to compensate.
+    MAX_ASPECT = 2.2
+    width_deg, height_deg = e - w, n - s
+    if width_deg > height_deg * MAX_ASPECT:
+        extra = (width_deg / MAX_ASPECT - height_deg) / 2
+        s, n = s - extra, n + extra
+    elif height_deg > width_deg * MAX_ASPECT:
+        extra = (height_deg / MAX_ASPECT - width_deg) / 2
+        w, e = w - extra, e + extra
+    w, e = max(W, w), min(E, e)
+    s, n = max(S, s), min(N, n)
+    if e <= w or n <= s:
+        return None
+
+    def px(lon, lat):
+        return (lon - W) / (E - W) * iw, (N - lat) / (N - S) * ih
+
+    x0, y0 = px(w, n)
+    x1, y1 = px(e, s)
+    x0i, y0i = max(0, int(x0)), max(0, int(y0))
+    x1i, y1i = min(iw, int(x1) + 1), min(ih, int(y1) + 1)
+    if x1i <= x0i or y1i <= y0i:
+        return None
+    crop = _RELIEF_MASTER.crop((x0i, y0i, x1i, y1i))
+    scale = min(1.0, max_px / max(crop.size))
+    if scale < 1.0:
+        crop = crop.resize((max(1, round(crop.width * scale)), max(1, round(crop.height * scale))), Image.LANCZOS)
+    buf = io.BytesIO()
+    crop.convert("RGB").save(buf, "JPEG", quality=74)
+    data_uri = "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode("ascii")
+    # report the bounds actually cropped (pixel rounding), not the padded request
+    def unpx(x, y):
+        return W + x / iw * (E - W), N - y / ih * (N - S)
+    real_w, real_n = unpx(x0i, y0i)
+    real_e, real_s = unpx(x1i, y1i)
+    return {"data_uri": data_uri, "bounds": [real_w, real_s, real_e, real_n]}
+
+
 def load_basegeo():
     """Embedded physical geography (Natural Earth: land/lakes/rivers) so every
     map draws real coastlines with no CDN basemap. None if cache missing."""
@@ -333,11 +408,14 @@ def compile_spec(spec, data):
     bbox = scope.get("region_bbox")
     if bbox and len(bbox) == 4:
         center = [(bbox[0] + bbox[2]) / 2, (bbox[1] + bbox[3]) / 2]
+        relief_bbox = bbox
     elif point_list:
-        center = [sum(p["lon"] for p in point_list) / len(point_list),
-                  sum(p["lat"] for p in point_list) / len(point_list)]
+        lons, lats = [p["lon"] for p in point_list], [p["lat"] for p in point_list]
+        center = [sum(lons) / len(lons), sum(lats) / len(lats)]
+        relief_bbox = [min(lons), min(lats), max(lons), max(lats)]
     else:
         center = [15, 45]
+        relief_bbox = None
 
     # how many matching events each requested theme actually carries —
     # so an author learns at compile time that a lens will come up empty
@@ -351,6 +429,7 @@ def compile_spec(spec, data):
     byear = basemap.get("historical_boundaries_year")
     if isinstance(byear, int):
         boundaries = load_boundaries(byear)
+    relief = load_relief_crop(relief_bbox) if relief_bbox else None
 
     return {
         "title": spec.get("title", "Untitled Map"), "subtitle": spec.get("subtitle", ""),
@@ -361,6 +440,7 @@ def compile_spec(spec, data):
         "initial_labels": bool(basemap.get("show_modern_labels", False)),
         "boundaries": boundaries,
         "basegeo": load_basegeo(),
+        "relief": relief,
         "year_min": year_min, "year_max": year_max, "center": center, "bbox": bbox,
         "stats": {"events": len(matching), "locations": len(point_list), "arcs": len(arcs),
                   "missing_locations": sorted(x for x in missing if x),
@@ -609,22 +689,44 @@ function riverColor(t){
   const w=hexish(t.water), b=hexish(t.border);
   return [Math.round(w[0]*0.55+b[0]*0.45), Math.round(w[1]*0.55+b[1]*0.45), Math.round(w[2]*0.55+b[2]*0.45)];
 }
+// Real terrain colour + shaded relief (Natural Earth I), tinted per theme so
+// the same photographic texture reads as parchment, engraving, night sky…
+// instead of one flat land colour. Falls back gracefully if no relief crop
+// was baked in (e.g. Pillow wasn't available at build time).
+const RELIEF_STYLE={
+  atlas:      {desaturate:0.05, tint:[255,255,255]},
+  copperplate:{desaturate:0.55, tint:[214,182,140]},
+  illuminated:{desaturate:0.25, tint:[255,225,170]},
+  noir:       {desaturate:0.85, tint:[130,140,175]},
+  woodcut:    {desaturate:0.92, tint:[150,120,90]},
+  lapis:      {desaturate:0.65, tint:[150,180,230]},
+};
+function reliefLayer(){
+  if(!DATA.relief) return null;
+  const st=RELIEF_STYLE[STATE.theme]||RELIEF_STYLE.atlas;
+  return new deck.BitmapLayer({id:"relief",image:DATA.relief.data_uri,bounds:DATA.relief.bounds,
+    desaturate:st.desaturate,tintColor:st.tint,opacity:0.97,pickable:false,
+    updateTriggers:{desaturate:[STATE.theme],tintColor:[STATE.theme]}});
+}
 function basegeoLayers(){
   if(!DATA.basegeo) return [];
-  const t=THEMES[STATE.theme];
-  return [
-    new deck.GeoJsonLayer({id:"bg-land",data:DATA.basegeo.land,stroked:true,filled:true,
-      getFillColor:[...hexish(t.land),255],getLineColor:[...hexish(t.border),200],
-      getLineWidth:0.9,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}),
-    new deck.GeoJsonLayer({id:"bg-lakes",data:DATA.basegeo.lakes,stroked:true,filled:true,
-      getFillColor:[...hexish(t.water),255],getLineColor:[...hexish(t.border),140],
-      getLineWidth:0.6,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}),
-    new deck.GeoJsonLayer({id:"bg-rivers",data:DATA.basegeo.rivers,stroked:true,filled:false,
-      getLineColor:[...riverColor(t),190],getLineWidth:0.8,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getLineColor:[STATE.theme]}}),
-  ];
+  const t=THEMES[STATE.theme], hasRelief=!!DATA.relief, L=[];
+  const relief=reliefLayer(); if(relief) L.push(relief);
+  // with relief imagery present, land becomes a crisp coastline OUTLINE only
+  // (the texture underneath already carries the colour); without it, a flat
+  // themed fill is the fallback basemap.
+  L.push(new deck.GeoJsonLayer({id:"bg-land",data:DATA.basegeo.land,stroked:true,filled:!hasRelief,
+    getFillColor:[...hexish(t.land),255],getLineColor:[...hexish(t.border),hasRelief?225:200],
+    getLineWidth:hasRelief?1.1:0.9,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}));
+  L.push(new deck.GeoJsonLayer({id:"bg-lakes",data:DATA.basegeo.lakes,stroked:true,filled:true,
+    getFillColor:[...hexish(t.water),hasRelief?235:255],getLineColor:[...hexish(t.border),140],
+    getLineWidth:0.6,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}));
+  L.push(new deck.GeoJsonLayer({id:"bg-rivers",data:DATA.basegeo.rivers,stroked:true,filled:false,
+    getLineColor:[...riverColor(t),hasRelief?230:190],getLineWidth:0.8,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getLineColor:[STATE.theme]}}));
+  return L;
 }
 
 // ---------- theme application (CSS) ----------
@@ -808,7 +910,7 @@ def emit_html(c):
     nar = c.get("narrative") or {}
     intro = f"<p>{html.escape(nar['intro'])}</p>" if nar.get("intro") else ""
     prov = ""
-    if nar.get("provenance_note") or c.get("directive") or c.get("boundaries"):
+    if nar.get("provenance_note") or c.get("directive") or c.get("boundaries") or c.get("relief"):
         bits = []
         if c.get("directive"):
             bits.append("Directive: <em>" + html.escape(c["directive"]) + "</em>")
@@ -818,6 +920,9 @@ def emit_html(c):
             b = c["boundaries"]
             bits.append(f"Political borders c. {b['year']} — approximate scholarly reconstruction, "
                         "after <em>historical-basemaps</em> (aourednik); for orientation, not authority.")
+        if c.get("relief"):
+            bits.append("Terrain colour and shaded relief after <em>Natural Earth I</em> (public domain); "
+                        "modern physical geography, not a period reconstruction.")
         prov = '<div class="prov">' + "<br>".join(bits) + "</div>"
     s = c["stats"]
     stats = f"{s['events']} events · {s['locations']} locations · {s['arcs']} transmission arcs"

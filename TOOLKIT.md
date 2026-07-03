@@ -144,6 +144,23 @@ three layers and draws them itself — sea-coloured canvas, themed land fill,
 coastline stroke, lakes, rivers — so there is **no CDN basemap dependency**.
 Run once; the compilers warn if the cache is missing.
 
+### fetch_relief.py — the terrain-colour / shaded-relief cache
+```
+python fetch_relief.py
+```
+**Requires Pillow** (`pip install pillow`) — the one exception to "stdlib
+only" in this toolkit. Downloads *Natural Earth I with Shaded Relief and
+Water* (public domain, ~88 MB zipped), crops to the project window, and
+writes a shared master cache to `data/relief/world_relief.jpg` (~750 KB).
+`build_map.py`'s `load_relief_crop(bbox)` re-crops a per-map slice from that
+master at build time — cropped to the map's own bbox (or the data's point
+extent, aspect-ratio-equalized so wide-but-flat bboxes like a London↔Kraków
+network don't crop a wafer-thin sliver), downsampled to a max dimension, and
+base64-embedded as a JPEG. Every engine calls this automatically; if the
+master cache or Pillow is missing, maps fall back to a flat themed land fill
+with no error. Run once; re-run only if you want a different `MASTER_WIDTH`
+or window.
+
 ### fetch_boundaries.py — the period-borders cache
 ```
 python fetch_boundaries.py [year …]
@@ -277,10 +294,12 @@ The suite is structural — WebGL rendering is verified manually in a browser
 
 Runtime (CDN, pinned): MapLibre GL 4.7.1 and deck.gl 9.0.33 JS, plus Google
 Fonts. The basemap itself is **fully embedded** (Natural Earth geography +
-historical borders live inside each HTML file), so an offline map still shows
-land, sea, lakes, rivers, and borders — but the JS libraries still need
-vendoring for true archival use (NEXTSTEPS.md Tier 2 §4). Build-time: Python 3
-stdlib only — nothing to install.
+terrain relief + historical borders all live inside each HTML file), so an
+offline map still shows land, sea, lakes, rivers, terrain colour, and borders
+— but the JS libraries still need vendoring for true archival use (NEXTSTEPS.md
+Tier 2 §4). Build-time: Python 3 stdlib only, **except** `fetch_relief.py`,
+which needs Pillow — everything downstream of its cache (`load_relief_crop` in
+`build_map.py`) degrades gracefully to no-Pillow-installed with no error.
 
 Historical boundaries are from aourednik/historical-basemaps (approximate
 scholarly reconstructions); physical geography is Natural Earth (public

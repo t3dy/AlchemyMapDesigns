@@ -136,22 +136,32 @@ function restyle(){const t=THEMES[STATE.theme];
 function hexish(h){const m=h.replace("#","");return [parseInt(m.substr(0,2),16),parseInt(m.substr(2,2),16),parseInt(m.substr(4,2),16)];}
 function riverColor(t){const w=hexish(t.water),b=hexish(t.border);
   return [Math.round(w[0]*0.55+b[0]*0.45),Math.round(w[1]*0.55+b[1]*0.45),Math.round(w[2]*0.55+b[2]*0.45)];}
+// Real terrain colour + shaded relief (Natural Earth I), tinted per theme —
+// a life's route crosses real mountains and coastlines, not a flat abstraction.
+const RELIEF_STYLE={ noir:{desaturate:0.85,tint:[130,140,175]}, atlas:{desaturate:0.05,tint:[255,255,255]} };
+function reliefLayer(){
+  if(!J.relief) return null;
+  const st=RELIEF_STYLE[STATE.theme]||RELIEF_STYLE.atlas;
+  return new deck.BitmapLayer({id:"relief",image:J.relief.data_uri,bounds:J.relief.bounds,
+    desaturate:st.desaturate,tintColor:st.tint,opacity:0.97,pickable:false,
+    updateTriggers:{desaturate:[STATE.theme],tintColor:[STATE.theme]}});
+}
 function basegeoLayers(){
   if(!J.basegeo) return [];
-  const t=THEMES[STATE.theme];
-  return [
-    new deck.GeoJsonLayer({id:"bg-land",data:J.basegeo.land,stroked:true,filled:true,
-      getFillColor:[...hexish(t.land),255],getLineColor:[...hexish(t.border),200],
-      getLineWidth:0.9,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}),
-    new deck.GeoJsonLayer({id:"bg-lakes",data:J.basegeo.lakes,stroked:true,filled:true,
-      getFillColor:[...hexish(t.water),255],getLineColor:[...hexish(t.border),140],
-      getLineWidth:0.6,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}),
-    new deck.GeoJsonLayer({id:"bg-rivers",data:J.basegeo.rivers,stroked:true,filled:false,
-      getLineColor:[...riverColor(t),190],getLineWidth:0.8,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getLineColor:[STATE.theme]}}),
-  ];
+  const t=THEMES[STATE.theme], hasRelief=!!J.relief, L=[];
+  const relief=reliefLayer(); if(relief) L.push(relief);
+  L.push(new deck.GeoJsonLayer({id:"bg-land",data:J.basegeo.land,stroked:true,filled:!hasRelief,
+    getFillColor:[...hexish(t.land),255],getLineColor:[...hexish(t.border),hasRelief?225:200],
+    getLineWidth:hasRelief?1.1:0.9,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}));
+  L.push(new deck.GeoJsonLayer({id:"bg-lakes",data:J.basegeo.lakes,stroked:true,filled:true,
+    getFillColor:[...hexish(t.water),hasRelief?235:255],getLineColor:[...hexish(t.border),140],
+    getLineWidth:0.6,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}));
+  L.push(new deck.GeoJsonLayer({id:"bg-rivers",data:J.basegeo.rivers,stroked:true,filled:false,
+    getLineColor:[...riverColor(t),hasRelief?230:190],getLineWidth:0.8,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getLineColor:[STATE.theme]}}));
+  return L;
 }
 
 // Place names carry diacritics (Kraków, Třeboň…) that deck.gl's TextLayer
@@ -335,10 +345,13 @@ def main():
                     help="build even if stops lack evidence/source fields (drafts only)")
     args = ap.parse_args()
     J = json.loads(Path(args.journey).read_text(encoding="utf-8"))
-    from build_map import load_basegeo
+    from build_map import load_basegeo, load_relief_crop
     J["basegeo"] = load_basegeo()
     if not J["basegeo"]:
         print("  WARNING: no base geography cache — run scripts/fetch_basegeo.py first")
+    lons = [s["lon"] for s in J["stops"]]
+    lats = [s["lat"] for s in J["stops"]]
+    J["relief"] = load_relief_crop([min(lons), min(lats), max(lons), max(lats)], pad_frac=0.35)
     errors = validate_journey(J)
     if errors:
         for e in errors:

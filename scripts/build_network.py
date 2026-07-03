@@ -106,22 +106,35 @@ function restyle(){const t=THEMES[STATE.theme];
 function hexish(h){const m=h.replace("#","");return [parseInt(m.substr(0,2),16),parseInt(m.substr(2,2),16),parseInt(m.substr(4,2),16)];}
 function riverColor(t){const w=hexish(t.water),b=hexish(t.border);
   return [Math.round(w[0]*0.55+b[0]*0.45),Math.round(w[1]*0.55+b[1]*0.45),Math.round(w[2]*0.55+b[2]*0.45)];}
+// Real terrain colour + shaded relief (Natural Earth I), tinted per theme —
+// each constellation sits on the real landscape it played out in, not a flat fill.
+const RELIEF_STYLE={
+  atlas:{desaturate:0.05,tint:[255,255,255]}, copperplate:{desaturate:0.55,tint:[214,182,140]},
+  illuminated:{desaturate:0.25,tint:[255,225,170]}, noir:{desaturate:0.85,tint:[130,140,175]},
+};
+function reliefLayer(){
+  const rel=subj().relief; if(!rel) return null;
+  const st=RELIEF_STYLE[STATE.theme]||RELIEF_STYLE.atlas;
+  return new deck.BitmapLayer({id:"relief",image:rel.data_uri,bounds:rel.bounds,
+    desaturate:st.desaturate,tintColor:st.tint,opacity:0.97,pickable:false,
+    updateTriggers:{desaturate:[STATE.theme],tintColor:[STATE.theme]}});
+}
 function basegeoLayers(){
   if(!NET.basegeo) return [];
-  const t=THEMES[STATE.theme];
-  return [
-    new deck.GeoJsonLayer({id:"bg-land",data:NET.basegeo.land,stroked:true,filled:true,
-      getFillColor:[...hexish(t.land),255],getLineColor:[...hexish(t.border),200],
-      getLineWidth:0.9,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}),
-    new deck.GeoJsonLayer({id:"bg-lakes",data:NET.basegeo.lakes,stroked:true,filled:true,
-      getFillColor:[...hexish(t.water),255],getLineColor:[...hexish(t.border),140],
-      getLineWidth:0.6,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}),
-    new deck.GeoJsonLayer({id:"bg-rivers",data:NET.basegeo.rivers,stroked:true,filled:false,
-      getLineColor:[...riverColor(t),190],getLineWidth:0.8,lineWidthUnits:"pixels",pickable:false,
-      updateTriggers:{getLineColor:[STATE.theme]}}),
-  ];
+  const t=THEMES[STATE.theme], hasRelief=!!subj().relief, L=[];
+  const relief=reliefLayer(); if(relief) L.push(relief);
+  L.push(new deck.GeoJsonLayer({id:"bg-land",data:NET.basegeo.land,stroked:true,filled:!hasRelief,
+    getFillColor:[...hexish(t.land),255],getLineColor:[...hexish(t.border),hasRelief?225:200],
+    getLineWidth:hasRelief?1.1:0.9,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}));
+  L.push(new deck.GeoJsonLayer({id:"bg-lakes",data:NET.basegeo.lakes,stroked:true,filled:true,
+    getFillColor:[...hexish(t.water),hasRelief?235:255],getLineColor:[...hexish(t.border),140],
+    getLineWidth:0.6,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getFillColor:[STATE.theme],getLineColor:[STATE.theme]}}));
+  L.push(new deck.GeoJsonLayer({id:"bg-rivers",data:NET.basegeo.rivers,stroked:true,filled:false,
+    getLineColor:[...riverColor(t),hasRelief?230:190],getLineWidth:0.8,lineWidthUnits:"pixels",pickable:false,
+    updateTriggers:{getLineColor:[STATE.theme]}}));
+  return L;
 }
 
 function adjacent(id){const s=new Set([id]); activeEdges().forEach(e=>{if(e.source===id)s.add(e.target);if(e.target===id)s.add(e.source);}); return s;}
@@ -260,7 +273,7 @@ def main():
                     help="build even if edges lack evidence/note fields (drafts only)")
     args = ap.parse_args()
     net = json.loads(Path(args.data).read_text(encoding="utf-8"))
-    from build_map import load_basegeo
+    from build_map import load_basegeo, load_relief_crop
     net["basegeo"] = load_basegeo()
     if not net["basegeo"]:
         print("  WARNING: no base geography cache — run scripts/fetch_basegeo.py first")
@@ -270,6 +283,10 @@ def main():
             print(f"  {'warning' if args.allow_unsourced else 'DATA ERROR'}: {e}")
         if not args.allow_unsourced:
             raise SystemExit(2)
+    for s in net["subjects"]:
+        lons = [n["lon"] for n in s["nodes"]]
+        lats = [n["lat"] for n in s["nodes"]]
+        s["relief"] = load_relief_crop([min(lons), min(lats), max(lons), max(lats)], pad_frac=0.35)
     out = TEMPLATE.replace("__DATA__", json.dumps(net, ensure_ascii=False))
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(out, encoding="utf-8")

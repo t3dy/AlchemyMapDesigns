@@ -16,7 +16,7 @@ still missing. Date of audit: end of the current build sprint.
 | Dimension | Status | One-line verdict |
 |-----------|:------:|------------------|
 | Directability (describe → map) | 🟢 Strong | MapSpec compiler + 3 skills work end-to-end; specs now validated |
-| Visual quality / aesthetics | 🟢 Strong | 4 runtime themes, GPU layers, looks the part |
+| Visual quality / aesthetics | 🟢 Strong | 6 runtime themes, real terrain colour + shaded relief (not flat fills), GPU layers |
 | Map-type coverage | 🟢 Good | Data, journey, and network templates all built |
 | User controls | 🟢 Good | Lenses + filter bar + advanced drawer + time |
 | Scholarly honesty apparatus | 🟢 Good | Encodings built AND enforced: provenance-or-it-doesn't-compile, all 3 engines |

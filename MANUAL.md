@@ -82,6 +82,9 @@ Illuminated (courts and gold), Noir (single lives, spectacle), Woodcut & Rubric
 (ultramarine and gilt — late antiquity and the celestial). Every map *opens* in
 the style chosen for its material — the badge on its gallery card says which,
 and its page's design note says why — but switching is always one dropdown away.
+Under all six, the same real terrain — mountain shading, green lowlands, tan
+uplands — shows through, tinted to match: parchment-gold under Illuminated,
+near-monochrome engraving under Woodcut, a cool dark register under Noir.
 Switching theme never changes the data — only the dress.
 
 ## 5. Reading a journey
@@ -135,6 +138,10 @@ The encodings are consistent everywhere and worth memorizing:
 - **Borders are orientation, not authority.** Period boundaries are approximate
   scholarly reconstructions, snapped to the nearest cached year, and every map
   that shows them says so.
+- **Terrain is real but modern.** The colourful hills and shading under every
+  map are actual physical geography (Natural Earth), not decoration — but it's
+  today's terrain, not a period reconstruction; a map's panel says so whenever
+  the relief layer is present, right alongside the borders caveat.
 - **Corpus vs. curated.** Data maps visualize a database that is largely
   draft-status; journeys and networks are hand-curated from real scholarship
   with per-item sources. The gallery notes say which is which.

@@ -38,7 +38,10 @@ def check(name, fn):
         print(f"  ERROR {name}:\n{traceback.format_exc(limit=2)}")
 
 
-def html_is_sound(out, expect_boundaries=None):
+MAX_PROTO_BYTES = 2_500_000  # canary: a relief crop gone wrong (full master embedded) would blow past this
+
+
+def html_is_sound(out, expect_boundaries=None, expect_relief=None):
     assert "__DATA__" not in out and "__TITLE__" not in out, "unreplaced template token"
     assert "const DATA =" in out, "embedded DATA missing"
     assert 'id="pngBtn"' in out and 'id="linkBtn"' in out, "export/permalink buttons missing"
@@ -48,6 +51,13 @@ def html_is_sound(out, expect_boundaries=None):
     assert "demotiles" not in out, "CDN basemap dependency crept back in"
     if expect_boundaries:
         assert '"boundaries": {' in out or '"boundaries":{' in out, "boundaries not embedded"
+    # terrain colour + shaded relief: real Natural Earth I imagery, tinted per
+    # theme, so maps read like an atlas plate instead of a flat abstraction
+    assert "BitmapLayer" in out, "relief layer machinery missing"
+    if expect_relief:
+        assert '"relief": {' in out or '"relief":{' in out, "relief crop not embedded"
+        assert "data:image/jpeg;base64," in out, "relief image not embedded as a data URI"
+    assert len(out.encode("utf-8")) < MAX_PROTO_BYTES, f"file too large ({len(out)} bytes) — relief crop may not be downsampled"
     # mobile layout: #panel/#controls (data maps) are independently absolutely-
     # positioned corner boxes with fixed pixel widths — verified by hand in a
     # real browser (375/320px viewports) to fully overlap without both (a) a
@@ -80,8 +90,11 @@ def main():
             if wants_borders:
                 assert c["boundaries"], "boundaries requested but not loaded"
                 assert c["boundaries"]["geojson"]["features"], "boundary layer empty"
+            relief_available = bm.RELIEF_PATH.exists()
+            if relief_available:
+                assert c["relief"], "relief cache present but this spec compiled without a crop"
             out = bm.emit_html(c)
-            html_is_sound(out, expect_boundaries=wants_borders)
+            html_is_sound(out, expect_boundaries=wants_borders, expect_relief=relief_available)
 
         check(f"spec {sp.relative_to(ROOT)}", one)
 
@@ -120,6 +133,16 @@ def main():
         assert bm.load_basegeo(), "load_basegeo() returned nothing"
     check("base geography cache", basegeo)
 
+    # ---- relief master cache: present, plausible, slim ----
+    def relief_cache():
+        f = ROOT / "data" / "relief" / "world_relief.jpg"
+        assert f.exists(), "relief master cache missing (run fetch_relief.py)"
+        assert f.stat().st_size < 2_000_000, f"relief master unexpectedly large ({f.stat().st_size} bytes)"
+        crop = bm.load_relief_crop([2.0, 44.0, 21.0, 55.0])
+        assert crop and crop["data_uri"].startswith("data:image/jpeg;base64,"), "relief crop did not produce a JPEG data URI"
+        assert len(crop["data_uri"]) < 400_000, "a single relief crop is unexpectedly large"
+    check("relief master cache", relief_cache)
+
     # ---- journey/network prototypes carry geography, no CDN basemap ----
     def curated_protos():
         protos = [p for p in (ROOT / "prototypes").glob("journey-*.html")]
@@ -131,6 +154,10 @@ def main():
             assert "box-sizing:border-box" in out, f"{p.name}: no box-sizing reset"
             assert 'characterSet:LABEL_CHARS' in out, f"{p.name}: TextLayer missing the diacritics character-set fix"
             assert 'characterSet:"auto"' not in out, f"{p.name}: TextLayer using characterSet:'auto', which this deck.gl build ignores"
+            assert "BitmapLayer" in out, f"{p.name}: relief layer machinery missing"
+            if bm.RELIEF_PATH.exists():
+                assert '"relief": {' in out or '"relief":{' in out, f"{p.name}: relief cache present but no crop embedded"
+            assert len(out.encode("utf-8")) < MAX_PROTO_BYTES, f"{p.name}: file too large ({len(out)} bytes)"
     check("journey/network prototypes embed geography", curated_protos)
 
     # ---- journey prototypes stack #ctl/.legend/#doubt/#story on mobile ----
