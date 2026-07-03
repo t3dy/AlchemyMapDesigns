@@ -1,0 +1,30 @@
+{
+  "title": "Roger Bacon",
+  "subtitle": "Scientia experimentalis and the defence of alchemy, 13th c.",
+  "directive": "figure map: roger-bacon",
+  "scope": {
+    "persons": [
+      "roger-bacon"
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "woodcut",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1279
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "The Oxford Franciscan who folded alchemy into a programme of experimental science and prolongation of life — between Oxford, Paris, and the papal court.",
+    "provenance_note": "Events involving Roger Bacon (13 in corpus).",
+    "design_note": "Woodcut & Rubric: scholastic black-letter for the Oxford Franciscan; stark contrast for a career of sharp claims and condemnations."
+  }
+}

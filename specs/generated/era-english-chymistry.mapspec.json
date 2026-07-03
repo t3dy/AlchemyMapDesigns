@@ -1,0 +1,34 @@
+{
+  "title": "English Chymistry",
+  "subtitle": "From Ripley to the Royal Society, 16th–17th centuries",
+  "directive": "era showcase: English Chymistry",
+  "scope": {
+    "year_start": 1500,
+    "year_end": 1700,
+    "region_bbox": [
+      -8,
+      49,
+      8,
+      57
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "noir",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1650
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "England develops a distinctive chymical culture — the Ripley tradition, John Dee, Elias Ashmole, and Robert Boyle — bridging late-medieval transmutation and the new experimental philosophy.",
+    "provenance_note": "Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status entries); locations are event geocodes, not residences. Transmission arcs are reconstructed from the dated itineraries of named figures — absence of an arc reflects gaps in the record, not certainty of no contact.",
+    "design_note": "Alchemical Noir: secretive manuscripts, pseudonyms, and private laboratories on the way to the Royal Society — gold arcs out of darkness."
+  }
+}

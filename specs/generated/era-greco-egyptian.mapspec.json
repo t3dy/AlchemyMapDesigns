@@ -1,0 +1,34 @@
+{
+  "title": "Greco-Egyptian Alchemy",
+  "subtitle": "Late-antique Alexandria and the first alchemical writers, c. 200–600 CE",
+  "directive": "era showcase: Greco-Egyptian Alchemy",
+  "scope": {
+    "year_start": 100,
+    "year_end": 650,
+    "region_bbox": [
+      10,
+      22,
+      40,
+      46
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "lapis",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 400
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "The earliest surviving alchemical corpus is Greek and Egyptian — Zosimos of Panopolis, Maria the Jewess, the Leiden and Stockholm papyri. Activity clusters tightly in Egypt: this is alchemy before it travels.",
+    "provenance_note": "Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status entries); locations are event geocodes, not residences. Transmission arcs are reconstructed from the dated itineraries of named figures — absence of an arc reflects gaps in the record, not certainty of no contact.",
+    "design_note": "Lapis & Gold: the tradition's deep past in late-antique ultramarine — gilt points on a temple-ceiling blue."
+  }
+}

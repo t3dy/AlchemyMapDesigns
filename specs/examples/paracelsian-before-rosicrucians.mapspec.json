@@ -1,0 +1,28 @@
+{
+  "title": "Paracelsian Alchemy in Central Europe, Before the Rosicrucians",
+  "subtitle": "Iatrochemistry and the German chymical reformation, c. 1490–1610",
+  "directive": "build a map of Paracelsian alchemy in Central Europe focusing on the period before the Rosicrucians",
+  "scope": {
+    "year_start": 1490,
+    "year_end": 1610,
+    "era": ["RENAISSANCE", "EARLY_MODERN"],
+    "regions": ["Germany", "Germany/Saxony", "Switzerland", "Austria", "Bohemia", "France/Alsace"],
+    "region_bbox": [5.0, 45.5, 19.0, 54.0],
+    "themes": ["paracelsian-alchemy", "iatrochemistry", "spagyrics", "medicamenta-tria", "tria-prima", "magia-naturalis", "transmutation"]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "parchment",
+      "historical_boundaries_year": 1560,
+      "show_modern_labels": false
+    },
+    "layers": ["points", "flows", "time-animation", "labels"],
+    "color_by": "theme",
+    "legend": true
+  },
+  "narrative": {
+    "intro": "Paracelsus (1493–1541) reframed alchemy as iatrochemistry — chymical medicine. This map traces his itinerant career and the diffusion of Paracelsian ideas through the German lands, Switzerland, Austria, and Bohemia in the century BEFORE the Rosicrucian manifestos (1614–1616), deliberately stopping short of the moment Paracelsianism fused with Rosicrucian currents.",
+    "provenance_note": "The 1610 cutoff marks the eve of the Fama Fraternitatis. Boundaries shown are c.1560 political divisions, not modern nations, to avoid the actor/analyst conflation."
+  }
+}

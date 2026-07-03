@@ -1,0 +1,40 @@
+{
+  "title": "Laboratories of Art",
+  "subtitle": "After Pamela Smith — artisanal culture, embodied knowledge, and the alchemical workshop",
+  "directive": "scholarship map: Laboratories of Art (21 citations in collection)",
+  "scope": {
+    "persons": [
+      "george-agricola",
+      "lazarus-ercker",
+      "anna-zieglerin",
+      "paracelsus",
+      "michael-maier"
+    ],
+    "region_bbox": [
+      4,
+      44,
+      20,
+      55
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "copperplate",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1600
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Smith reads alchemy as embodied, material practice — furnaces, assay balances, vermilion, the hands of craftspeople — against any purely textual or mystical reading. This map gathers the collection's artisan-practitioners: Agricola among the mines, Ercker in the assay house, Zieglerin staking her life on the lion's blood, Paracelsus the itinerant surgeon-chymist, and Maier, whose Atalanta Fugiens Smith reads as encoded laboratory procedure.",
+    "provenance_note": "Keyed to Pamela H. Smith's work on artisanal epistemology (The Business of Alchemy; cf. Dupré ed., Laboratories of Art) — third most-cited scholar in this collection (21 event-level citations). Scope = events involving Agricola, Ercker, Zieglerin, Paracelsus, or Maier: the artisanal-imperial workshop world.",
+    "design_note": "Copperplate Engraving: sepia line-work on cream, the register of Agricola's De re metallica plates and the printed technical book — craft knowledge as image. The style *is* Smith's source base."
+  }
+}

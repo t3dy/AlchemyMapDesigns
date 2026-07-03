@@ -1,0 +1,24 @@
+{
+  "title": "Women in the Art",
+  "subtitle": "The female practitioners the record kept — and how few it kept",
+  "directive": "map the women of alchemy across the whole tradition",
+  "scope": {
+    "persons": ["maria-the-jewess", "mary-the-prophetess", "theosebeia", "hildegard-of-bingen", "anna-zieglerin"],
+    "region_bbox": [-2.0, 24.0, 42.0, 56.0]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "historical_boundaries_year": 500,
+      "show_modern_labels": false
+    },
+    "layers": ["points", "flows", "time-animation", "labels"],
+    "color_by": "region",
+    "legend": true
+  },
+  "narrative": {
+    "intro": "Maria the Jewess, whose bain-marie still carries her name; Theosebeia, Zosimos's addressee and collaborator; Hildegard's convent natural philosophy; Anna Zieglerin staking her life on the lion's blood at a ducal court. A handful of dots spanning fourteen centuries — and that is precisely the exhibit: the tradition had women throughout, and the record kept almost none of them.",
+    "provenance_note": "Persons = the five women with events in the corpus (8 events total, 3rd–16th c.). The sparsity is the subject: it measures the gendered survival of evidence, not the historical participation of women. Kleopatra the Alchemist is in the corpus vocabulary but carries no dated, geocoded event, so she cannot appear — which proves the point. Borders shown are c. 500 and fit only the late-antique stops; treat them as backdrop, not claim."
+  }
+}

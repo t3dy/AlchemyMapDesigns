@@ -1,0 +1,42 @@
+{
+  "title": "The Egyptian Hermes",
+  "subtitle": "After Garth Fowden (1986) — Hermetism's late-antique Egyptian milieu",
+  "directive": "scholarship map: The Egyptian Hermes (15 citations in collection)",
+  "scope": {
+    "persons": [
+      "hermes-trismegistus",
+      "zosimos-of-panopolis",
+      "bolos-of-mendes",
+      "maria-the-jewess",
+      "ostanes",
+      "stephanus-of-alexandria",
+      "theosebeia"
+    ],
+    "region_bbox": [
+      18,
+      20,
+      42,
+      42
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "lapis",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 300
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Fowden anchored the Hermetica in a real place and society: Greco-Egyptian temple culture in decline, where technical and philosophical Hermetism were one milieu. This map gathers that circle — Zosimos and Theosebeia, Maria, Bolos, the Hermetic name itself — in its Egyptian and east-Mediterranean home.",
+    "provenance_note": "Keyed to Garth Fowden, The Egyptian Hermes (1986) — 15 event-level citations in this collection. Scope = events involving the late-antique Hermetic-alchemical circle.",
+    "design_note": "Lapis & Gold: ultramarine field and gilt points — the palette of late-antique luxury manuscripts and temple ceilings. A night-sky register for a corpus that claimed the authority of Egyptian priestly astrology."
+  }
+}

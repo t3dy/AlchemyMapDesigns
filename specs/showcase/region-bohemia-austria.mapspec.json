@@ -1,0 +1,36 @@
+{
+  "title": "The Danubian World",
+  "subtitle": "Bohemia and Austria: alchemy at the Habsburg courts",
+  "directive": "region map: Bohemia, Austria",
+  "scope": {
+    "regions": [
+      "Bohemia",
+      "Austria"
+    ],
+    "region_bbox": [
+      9,
+      46,
+      19.5,
+      51.5
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "noir",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1600
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Rudolfine Prague and the Austrian lands: the most concentrated court patronage of alchemy in Europe, with its own economy of favour, imprisonment, and spectacle.",
+    "provenance_note": "Regions = 'Bohemia' (37 events) + 'Austria' (25). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Alchemical Noir: Rudolfine Prague after dark — court spectacle, favour and imprisonment, gold arcs on black."
+  }
+}

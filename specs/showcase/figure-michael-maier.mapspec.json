@@ -1,0 +1,30 @@
+{
+  "title": "Michael Maier",
+  "subtitle": "Emblems, courts, and the Atalanta Fugiens, c. 1568–1622",
+  "directive": "figure map: michael-maier",
+  "scope": {
+    "persons": [
+      "michael-maier"
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "copperplate",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1600
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Imperial physician, Rosicrucian apologist, author of the multimedia emblem book Atalanta Fugiens — between Prague, the German courts, and England.",
+    "provenance_note": "Events involving Michael Maier (11 in corpus).",
+    "design_note": "Copperplate Engraving: Atalanta Fugiens is literally a book of copperplate emblems (de Bry, 1617); the map borrows its own subject's medium."
+  }
+}

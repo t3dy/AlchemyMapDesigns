@@ -1,0 +1,35 @@
+{
+  "title": "Alchemical Egypt",
+  "subtitle": "Alexandria, Panopolis, and the roots of the art",
+  "directive": "region map: Egypt",
+  "scope": {
+    "regions": [
+      "Egypt"
+    ],
+    "region_bbox": [
+      24,
+      21,
+      37,
+      33
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "lapis",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 300
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "The tradition's taproot: temple metallurgy, Greco-Egyptian recipe papyri, Zosimos's visions, and the Arabic inheritors. The densest single region in the corpus.",
+    "provenance_note": "Region = 'Egypt' (124 events). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Lapis & Gold: Egypt is the tradition's sacred deep past; ultramarine and gilt give the taproot its temple-ceiling register."
+  }
+}

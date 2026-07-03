@@ -1,0 +1,35 @@
+{
+  "title": "Alchemical Italy",
+  "subtitle": "Courts, universities, and the Hermetic revival",
+  "directive": "region map: Italy",
+  "scope": {
+    "regions": [
+      "Italy"
+    ],
+    "region_bbox": [
+      6,
+      36,
+      19,
+      47.5
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1492
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "From Salerno and the scholastic faculties to Ficino's Florence and the print shops of Venice — Italy is where alchemy met humanism.",
+    "provenance_note": "Region = 'Italy' (83 events). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Illuminated Manuscript: Medici patronage, humanist manuscripts, gilded court culture — Italy's alchemy arrived dressed like this."
+  }
+}

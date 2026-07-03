@@ -1,0 +1,34 @@
+{
+  "title": "The 14th Century",
+  "subtitle": "Transmission of alchemical knowledge, 1300–1399 CE",
+  "directive": "significant movements of the 14th century",
+  "scope": {
+    "year_start": 1300,
+    "year_end": 1399,
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1350
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Alchemical activity in the 14th century. Arcs trace where individual practitioners and translators carried knowledge between centres.",
+    "provenance_note": "Transmission arcs are reconstructed from the recorded itineraries of named figures; absence of an arc reflects gaps in the record, not certainty of no contact.",
+    "design_note": "Illuminated Manuscript: the century series rotates the full six-style wardrobe, so reading the centuries in order is also a tour of the theme engine — and consecutive chapters never look alike."
+  }
+}

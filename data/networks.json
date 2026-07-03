@@ -1,0 +1,906 @@
+{
+  "_schema": "Curated person-to-person edges. Type=relationship kind; direction=for asymmetric ties (patron-of, taught) source->target; weight=magnitude/strength; evidence=attested|inferred; survives=does direct documentary evidence survive (drives the survival-bias toggle); note carries the citation/claim.",
+  "subjects": [
+    {
+      "slug": "rudolfine-prague",
+      "title": "The Court of Rudolf II",
+      "subtitle": "Patronage and alchemy at Rudolfine Prague, c. 1583–1612",
+      "theme": "illuminated",
+      "provenance_note": "Patronage ties after Evans, Rudolf II and His World (1973). The court drew alchemists, astronomers and physicians; favour was real but unstable — Kelley was knighted, then imprisoned until his death.",
+      "nodes": [
+        {
+          "id": "rudolf-ii",
+          "label": "Rudolf II",
+          "slug": null,
+          "lat": 50.0755,
+          "lon": 14.4378,
+          "role": "Holy Roman Emperor; patron",
+          "year": 1576
+        },
+        {
+          "id": "john-dee",
+          "label": "John Dee",
+          "slug": "john-dee",
+          "lat": 51.47,
+          "lon": -0.26,
+          "role": "English magus",
+          "year": 1583
+        },
+        {
+          "id": "edward-kelley",
+          "label": "Edward Kelley",
+          "slug": null,
+          "lat": 50.503,
+          "lon": 13.636,
+          "role": "Scryer & alchemist",
+          "year": 1584
+        },
+        {
+          "id": "michael-maier",
+          "label": "Michael Maier",
+          "slug": "michael-maier",
+          "lat": 50.0875,
+          "lon": 14.421,
+          "role": "Imperial physician; emblematist",
+          "year": 1609
+        },
+        {
+          "id": "oswald-croll",
+          "label": "Oswald Croll",
+          "slug": null,
+          "lat": 50.809,
+          "lon": 8.77,
+          "role": "Paracelsian physician",
+          "year": 1597
+        },
+        {
+          "id": "michael-sendivogius",
+          "label": "Michael Sendivogius",
+          "slug": "michael-sendivogius",
+          "lat": 50.0647,
+          "lon": 19.945,
+          "role": "Polish alchemist",
+          "year": 1593
+        },
+        {
+          "id": "tycho-brahe",
+          "label": "Tycho Brahe",
+          "slug": "tycho-brahe",
+          "lat": 50.29,
+          "lon": 14.82,
+          "role": "Imperial astronomer",
+          "year": 1599
+        },
+        {
+          "id": "heinrich-khunrath",
+          "label": "Heinrich Khunrath",
+          "slug": "heinrich-khunrath",
+          "lat": 51.05,
+          "lon": 13.74,
+          "role": "Theosophist",
+          "year": 1591
+        }
+      ],
+      "edges": [
+        {
+          "source": "rudolf-ii",
+          "target": "john-dee",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Summoned Dee to Prague, 1584 (Evans 1973)"
+        },
+        {
+          "source": "rudolf-ii",
+          "target": "edward-kelley",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Knighted, then imprisoned Kelley until his death, 1591–98"
+        },
+        {
+          "source": "rudolf-ii",
+          "target": "michael-maier",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Appointed imperial physician & Count Palatine, c.1609"
+        },
+        {
+          "source": "rudolf-ii",
+          "target": "tycho-brahe",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Imperial Mathematician, 1599"
+        },
+        {
+          "source": "rudolf-ii",
+          "target": "oswald-croll",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Court physician circle; Basilica chymica dedicated to court figures"
+        },
+        {
+          "source": "rudolf-ii",
+          "target": "michael-sendivogius",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 1,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Alchemical demonstrations at court"
+        },
+        {
+          "source": "john-dee",
+          "target": "edward-kelley",
+          "type": "collaborated",
+          "direction": false,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Scrying partnership / 'angelic conversations', 1582–89 (Dee's diaries)"
+        },
+        {
+          "source": "heinrich-khunrath",
+          "target": "michael-maier",
+          "type": "cited",
+          "direction": true,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Shared emblematic-theosophic idiom; direct contact undocumented"
+        }
+      ],
+      "design_note": "Illuminated Manuscript: a court map wears court dress — parchment and gold for the patronage economy of Rudolf's Prague. Edge colour = tie type; patron ties run darker at the patron's end."
+    },
+    {
+      "slug": "english-chymists",
+      "title": "The English Chymists",
+      "subtitle": "From Ripley to Newton: a lineage of reading and collecting, 15th–17th c.",
+      "theme": "copperplate",
+      "provenance_note": "Transmission of English alchemy traced through texts and collections rather than personal acquaintance. Ashmole is the hinge: his Theatrum Chemicum Britannicum (1652) reprinted the medieval verse, and he acquired Dee's papers.",
+      "nodes": [
+        {
+          "id": "george-ripley",
+          "label": "George Ripley",
+          "slug": "george-ripley",
+          "lat": 54.083,
+          "lon": -0.19,
+          "role": "Canon of Bridlington",
+          "year": 1471
+        },
+        {
+          "id": "john-dee",
+          "label": "John Dee",
+          "slug": "john-dee",
+          "lat": 51.47,
+          "lon": -0.26,
+          "role": "Magus & collector",
+          "year": 1558
+        },
+        {
+          "id": "samuel-norton",
+          "label": "Samuel Norton",
+          "slug": "samuel-norton",
+          "lat": 51.4545,
+          "lon": -2.5879,
+          "role": "Alchemical author",
+          "year": 1577
+        },
+        {
+          "id": "elias-ashmole",
+          "label": "Elias Ashmole",
+          "slug": "elias-ashmole",
+          "lat": 51.5074,
+          "lon": -0.1278,
+          "role": "Antiquary & editor",
+          "year": 1652
+        },
+        {
+          "id": "robert-boyle",
+          "label": "Robert Boyle",
+          "slug": "robert-boyle",
+          "lat": 51.752,
+          "lon": -1.2577,
+          "role": "Chymist",
+          "year": 1660
+        },
+        {
+          "id": "isaac-newton",
+          "label": "Isaac Newton",
+          "slug": "isaac-newton",
+          "lat": 52.2053,
+          "lon": 0.1218,
+          "role": "Natural philosopher",
+          "year": 1670
+        }
+      ],
+      "edges": [
+        {
+          "source": "elias-ashmole",
+          "target": "george-ripley",
+          "type": "cited",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Reprinted Ripley's verse in Theatrum Chemicum Britannicum, 1652"
+        },
+        {
+          "source": "elias-ashmole",
+          "target": "john-dee",
+          "type": "collected",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Acquired and preserved Dee's manuscripts and diaries"
+        },
+        {
+          "source": "elias-ashmole",
+          "target": "samuel-norton",
+          "type": "cited",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Edited/printed Norton's alchemical works"
+        },
+        {
+          "source": "robert-boyle",
+          "target": "isaac-newton",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Exchanged on the 'philosophers' mercury', 1670s–80s"
+        },
+        {
+          "source": "isaac-newton",
+          "target": "robert-boyle",
+          "type": "cited",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Newton's chymical notebooks draw on Boyle's papers"
+        },
+        {
+          "source": "george-ripley",
+          "target": "john-dee",
+          "type": "cited",
+          "direction": true,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Ripley tradition shaped Dee's alchemical reading (inferred)"
+        }
+      ],
+      "design_note": "Copperplate Engraving: a lineage that runs through printed books and collected papers — Ashmole's engraved Theatrum is the hinge, so the map borrows its plate-work register."
+    },
+    {
+      "slug": "paracelsian-network",
+      "title": "The Paracelsian Movement",
+      "subtitle": "A doctrine and its quarrelsome heirs, 16th–17th c.",
+      "theme": "atlas",
+      "provenance_note": "Influence and dissent in the spread of chymical medicine. 'Influence' is an analyst's category; the followers were also rivals and revisionists — van Helmont extended Paracelsian medicine while rejecting the tria prima.",
+      "nodes": [
+        {
+          "id": "henry-cornelius-agrippa",
+          "label": "H. C. Agrippa",
+          "slug": "henry-cornelius-agrippa",
+          "lat": 50.9375,
+          "lon": 6.9603,
+          "role": "Magus (precursor)",
+          "year": 1510
+        },
+        {
+          "id": "paracelsus",
+          "label": "Paracelsus",
+          "slug": "paracelsus",
+          "lat": 47.5596,
+          "lon": 7.5886,
+          "role": "Founder of iatrochemistry",
+          "year": 1527
+        },
+        {
+          "id": "oswald-croll",
+          "label": "Oswald Croll",
+          "slug": null,
+          "lat": 50.809,
+          "lon": 8.77,
+          "role": "Systematizer",
+          "year": 1609
+        },
+        {
+          "id": "heinrich-khunrath",
+          "label": "Heinrich Khunrath",
+          "slug": "heinrich-khunrath",
+          "lat": 53.5511,
+          "lon": 9.9937,
+          "role": "Theosophist",
+          "year": 1595
+        },
+        {
+          "id": "jan-van-helmont",
+          "label": "J. B. van Helmont",
+          "slug": "jan-van-helmont",
+          "lat": 50.8503,
+          "lon": 4.3517,
+          "role": "Critical heir",
+          "year": 1620
+        },
+        {
+          "id": "michael-maier",
+          "label": "Michael Maier",
+          "slug": "michael-maier",
+          "lat": 50.1109,
+          "lon": 8.6821,
+          "role": "Emblematist",
+          "year": 1610
+        }
+      ],
+      "edges": [
+        {
+          "source": "henry-cornelius-agrippa",
+          "target": "paracelsus",
+          "type": "influenced",
+          "direction": true,
+          "weight": 2,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "The magia naturalis tradition behind Paracelsus (inferred)"
+        },
+        {
+          "source": "paracelsus",
+          "target": "oswald-croll",
+          "type": "influenced",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Croll codified Paracelsian iatrochemistry, Basilica chymica 1609"
+        },
+        {
+          "source": "paracelsus",
+          "target": "heinrich-khunrath",
+          "type": "influenced",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Paracelsian-theosophic synthesis"
+        },
+        {
+          "source": "paracelsus",
+          "target": "jan-van-helmont",
+          "type": "polemicized-against",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Helmont extended chymical medicine but rejected the tria prima"
+        },
+        {
+          "source": "paracelsus",
+          "target": "michael-maier",
+          "type": "influenced",
+          "direction": true,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Paracelsian currents in Maier's medicine (inferred)"
+        },
+        {
+          "source": "oswald-croll",
+          "target": "heinrich-khunrath",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Shared circle; correspondence not extant"
+        }
+      ],
+      "design_note": "Modern Atlas: a doctrinal movement mapped plainly, because the argument here is structural — influence vs. dissent — and needs legibility more than atmosphere."
+    },
+    {
+      "slug": "republic-of-letters",
+      "title": "The Republic of Letters",
+      "subtitle": "A correspondence network — and a survival-bias illusion, 17th c.",
+      "theme": "noir",
+      "provenance_note": "Surviving correspondence is a survival map, not a sociability map. Hartlib and Mersenne sit at the centre partly because their papers were preserved. Use the toggle: 'only what survives' over-centres the archive-keepers; 'reconstructed' restores the missing ties.",
+      "nodes": [
+        {
+          "id": "samuel-hartlib",
+          "label": "Samuel Hartlib",
+          "slug": null,
+          "lat": 51.5174,
+          "lon": -0.1062,
+          "role": "Intelligencer (archive survives)",
+          "year": 1630
+        },
+        {
+          "id": "marin-mersenne",
+          "label": "Marin Mersenne",
+          "slug": null,
+          "lat": 48.8566,
+          "lon": 2.3522,
+          "role": "Hub (~1700 letters survive)",
+          "year": 1620
+        },
+        {
+          "id": "robert-boyle",
+          "label": "Robert Boyle",
+          "slug": "robert-boyle",
+          "lat": 51.752,
+          "lon": -1.2577,
+          "role": "Chymist",
+          "year": 1660
+        },
+        {
+          "id": "isaac-newton",
+          "label": "Isaac Newton",
+          "slug": "isaac-newton",
+          "lat": 52.2053,
+          "lon": 0.1218,
+          "role": "Natural philosopher",
+          "year": 1670
+        },
+        {
+          "id": "jan-van-helmont",
+          "label": "J. B. van Helmont",
+          "slug": "jan-van-helmont",
+          "lat": 50.8503,
+          "lon": 4.3517,
+          "role": "Chymical physician",
+          "year": 1620
+        },
+        {
+          "id": "elias-ashmole",
+          "label": "Elias Ashmole",
+          "slug": "elias-ashmole",
+          "lat": 51.5074,
+          "lon": -0.1278,
+          "role": "Antiquary",
+          "year": 1650
+        },
+        {
+          "id": "john-dee",
+          "label": "John Dee",
+          "slug": "john-dee",
+          "lat": 51.47,
+          "lon": -0.26,
+          "role": "Magus (earlier; few letters survive)",
+          "year": 1580
+        }
+      ],
+      "edges": [
+        {
+          "source": "samuel-hartlib",
+          "target": "robert-boyle",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 5,
+          "evidence": "attested",
+          "survives": true,
+          "note": "The Hartlib Papers preserve a dense exchange"
+        },
+        {
+          "source": "samuel-hartlib",
+          "target": "jan-van-helmont",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Hartlib circle promoted Helmontian medicine"
+        },
+        {
+          "source": "marin-mersenne",
+          "target": "samuel-hartlib",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Cross-Channel intelligencing"
+        },
+        {
+          "source": "robert-boyle",
+          "target": "isaac-newton",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "On the philosophers' mercury"
+        },
+        {
+          "source": "elias-ashmole",
+          "target": "robert-boyle",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Same London circles; letters not extant"
+        },
+        {
+          "source": "john-dee",
+          "target": "samuel-hartlib",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Generational gap; no surviving tie — Dee's network is largely lost"
+        },
+        {
+          "source": "marin-mersenne",
+          "target": "isaac-newton",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Plausible reach of Mersenne's web; not documented"
+        }
+      ],
+      "design_note": "Alchemical Noir: the survival-bias exhibit. On black, dropping the lost letters visibly extinguishes the network — the toggle reads as lights going out."
+    },
+    {
+      "slug": "hartlib-circle",
+      "title": "The Hartlib Circle",
+      "subtitle": "Intelligencing, chymistry, and universal reformation, c. 1630–1662",
+      "theme": "copperplate",
+      "provenance_note": "Ties after the Hartlib Papers (Sheffield) and Newman & Principe, Alchemy Tried in the Fire (2002). Hartlib's centrality is partly real (he was the node) and partly archival (his papers survived); the survival toggle shows how much of the circle's texture depends on one preserved archive.",
+      "nodes": [
+        {
+          "id": "samuel-hartlib",
+          "label": "Samuel Hartlib",
+          "slug": "samuel-hartlib",
+          "lat": 51.5174,
+          "lon": -0.1062,
+          "role": "Intelligencer of the circle",
+          "year": 1628
+        },
+        {
+          "id": "robert-boyle",
+          "label": "Robert Boyle",
+          "slug": "robert-boyle",
+          "lat": 51.752,
+          "lon": -1.2577,
+          "role": "Chymist; 'Invisible College'",
+          "year": 1646
+        },
+        {
+          "id": "george-starkey",
+          "label": "George Starkey",
+          "slug": "george-starkey",
+          "lat": 51.515,
+          "lon": -0.092,
+          "role": "Chymist; 'Eirenaeus Philalethes'",
+          "year": 1650
+        },
+        {
+          "id": "john-dury",
+          "label": "John Dury",
+          "slug": null,
+          "lat": 52.08,
+          "lon": 4.31,
+          "role": "Irenicist; itinerant diplomat",
+          "year": 1630
+        },
+        {
+          "id": "jan-comenius",
+          "label": "Jan Amos Comenius",
+          "slug": null,
+          "lat": 52.3676,
+          "lon": 4.9041,
+          "role": "Pansophist educator",
+          "year": 1641
+        },
+        {
+          "id": "benjamin-worsley",
+          "label": "Benjamin Worsley",
+          "slug": null,
+          "lat": 51.503,
+          "lon": -0.113,
+          "role": "Projector; saltpetre schemes",
+          "year": 1646
+        },
+        {
+          "id": "frederick-clodius",
+          "label": "Frederick Clodius",
+          "slug": null,
+          "lat": 51.52,
+          "lon": -0.1,
+          "role": "Chymist; Hartlib's son-in-law",
+          "year": 1652
+        },
+        {
+          "id": "katherine-ranelagh",
+          "label": "Katherine Jones, Lady Ranelagh",
+          "slug": null,
+          "lat": 51.512,
+          "lon": -0.135,
+          "role": "Patron; Boyle's sister",
+          "year": 1645
+        }
+      ],
+      "edges": [
+        {
+          "source": "samuel-hartlib",
+          "target": "robert-boyle",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 5,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Dense exchange in the Hartlib Papers from 1646"
+        },
+        {
+          "source": "samuel-hartlib",
+          "target": "john-dury",
+          "type": "collaborated",
+          "direction": false,
+          "weight": 4,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Lifelong partnership for protestant union and reform"
+        },
+        {
+          "source": "samuel-hartlib",
+          "target": "jan-comenius",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Engineered Comenius's 1641 visit to England"
+        },
+        {
+          "source": "samuel-hartlib",
+          "target": "benjamin-worsley",
+          "type": "collaborated",
+          "direction": false,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Saltpetre and husbandry projects in the Papers"
+        },
+        {
+          "source": "samuel-hartlib",
+          "target": "frederick-clodius",
+          "type": "collaborated",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Family tie; chymical laboratory at Hartlib's house"
+        },
+        {
+          "source": "george-starkey",
+          "target": "robert-boyle",
+          "type": "taught",
+          "direction": true,
+          "weight": 4,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Starkey tutored Boyle in chymistry, 1651–53 (Newman & Principe 2002)"
+        },
+        {
+          "source": "samuel-hartlib",
+          "target": "george-starkey",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Starkey's letters and 'Philalethes' tracts circulated via Hartlib"
+        },
+        {
+          "source": "katherine-ranelagh",
+          "target": "robert-boyle",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Hosted Boyle's London laboratory; his closest intellectual companion"
+        },
+        {
+          "source": "katherine-ranelagh",
+          "target": "samuel-hartlib",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Ranelagh letters in the Hartlib Papers"
+        },
+        {
+          "source": "benjamin-worsley",
+          "target": "george-starkey",
+          "type": "polemicized-against",
+          "direction": false,
+          "weight": 1,
+          "evidence": "inferred",
+          "survives": false,
+          "note": "Rivalry over chymical secrets c.1651; known mostly from Starkey's side"
+        },
+        {
+          "source": "john-dury",
+          "target": "jan-comenius",
+          "type": "collaborated",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Joint pansophic-irenic programme"
+        }
+      ],
+      "design_note": "Copperplate Engraving: the circle lived on paper — copied letters, printed proposals, an archive that survived. The print register is the argument."
+    },
+    {
+      "slug": "ficino-circle",
+      "title": "The Florentine Academy",
+      "subtitle": "Ficino, the Medici, and the Hermetic revival, c. 1462–1499",
+      "theme": "illuminated",
+      "provenance_note": "Ties after Hankins, Plato in the Italian Renaissance (1990) and Copenhaver, Hermetica (1992). The 'Platonic Academy' was looser than legend claims — closer to a patronage constellation around Ficino's villa at Careggi than an institution. Treat the tidy network shape with suspicion.",
+      "nodes": [
+        {
+          "id": "marsilio-ficino",
+          "label": "Marsilio Ficino",
+          "slug": "marsilio-ficino",
+          "lat": 43.803,
+          "lon": 11.247,
+          "role": "Translator of Plato & Hermes",
+          "year": 1462
+        },
+        {
+          "id": "cosimo-de-medici",
+          "label": "Cosimo de' Medici",
+          "slug": null,
+          "lat": 43.7696,
+          "lon": 11.2558,
+          "role": "Patron; commissioned the Hermetica",
+          "year": 1462
+        },
+        {
+          "id": "lorenzo-de-medici",
+          "label": "Lorenzo de' Medici",
+          "slug": null,
+          "lat": 43.771,
+          "lon": 11.248,
+          "role": "Patron of the next generation",
+          "year": 1469
+        },
+        {
+          "id": "pico-della-mirandola",
+          "label": "Pico della Mirandola",
+          "slug": "pico-della-mirandola",
+          "lat": 44.8871,
+          "lon": 11.0662,
+          "role": "Syncretist; the 900 Theses",
+          "year": 1484
+        },
+        {
+          "id": "angelo-poliziano",
+          "label": "Angelo Poliziano",
+          "slug": null,
+          "lat": 43.0926,
+          "lon": 11.7867,
+          "role": "Philologist & poet",
+          "year": 1470
+        },
+        {
+          "id": "leonardo-da-pistoia",
+          "label": "Leonardo da Pistoia",
+          "slug": null,
+          "lat": 43.933,
+          "lon": 10.918,
+          "role": "Monk; carried the Hermetic MS west",
+          "year": 1460
+        }
+      ],
+      "edges": [
+        {
+          "source": "cosimo-de-medici",
+          "target": "marsilio-ficino",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 4,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Villa at Careggi, 1462; ordered Hermes translated before Plato (Copenhaver 1992)"
+        },
+        {
+          "source": "leonardo-da-pistoia",
+          "target": "cosimo-de-medici",
+          "type": "collected",
+          "direction": true,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Brought the Corpus Hermeticum manuscript from Macedonia, c.1460"
+        },
+        {
+          "source": "lorenzo-de-medici",
+          "target": "marsilio-ficino",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Continued Medici support after 1469"
+        },
+        {
+          "source": "lorenzo-de-medici",
+          "target": "angelo-poliziano",
+          "type": "patron-of",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Tutor to Lorenzo's sons; household intimate"
+        },
+        {
+          "source": "marsilio-ficino",
+          "target": "pico-della-mirandola",
+          "type": "influenced",
+          "direction": true,
+          "weight": 3,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Pico arrived 1484, the year Ficino's Plato appeared; they disputed astrology in print"
+        },
+        {
+          "source": "pico-della-mirandola",
+          "target": "angelo-poliziano",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Close friendship; died within weeks of each other, 1494"
+        },
+        {
+          "source": "marsilio-ficino",
+          "target": "angelo-poliziano",
+          "type": "corresponded",
+          "direction": false,
+          "weight": 2,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Ficino's letter-book includes Poliziano"
+        },
+        {
+          "source": "pico-della-mirandola",
+          "target": "marsilio-ficino",
+          "type": "polemicized-against",
+          "direction": false,
+          "weight": 1,
+          "evidence": "attested",
+          "survives": true,
+          "note": "Pico's Disputationes attacked the astrology Ficino defended"
+        }
+      ],
+      "design_note": "Illuminated Manuscript: Careggi's patronage constellation in gold on parchment — the map dressed as the manuscript Cosimo paid to have translated first."
+    }
+  ]
+}

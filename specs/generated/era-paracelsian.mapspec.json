@@ -1,0 +1,42 @@
+{
+  "title": "Paracelsian Iatrochemistry",
+  "subtitle": "Chymical medicine in the German lands, c. 1490–1610",
+  "directive": "era showcase: Paracelsian Iatrochemistry",
+  "scope": {
+    "year_start": 1490,
+    "year_end": 1610,
+    "regions": [
+      "Germany",
+      "Germany/Saxony",
+      "Switzerland",
+      "Austria",
+      "Bohemia",
+      "France/Alsace"
+    ],
+    "region_bbox": [
+      5,
+      45.5,
+      19,
+      54
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "atlas",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1600
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Paracelsus recasts alchemy as iatrochemistry — medicine made by the fire. The map traces his itinerant career and the diffusion of Paracelsian ideas before they fuse with Rosicrucian currents after 1614.",
+    "provenance_note": "Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status entries); locations are event geocodes, not residences. Transmission arcs are reconstructed from the dated itineraries of named figures — absence of an arc reflects gaps in the record, not certainty of no contact.",
+    "design_note": "Modern Atlas: iatrochemistry read plainly — a medical-reform movement mapped with clinical legibility."
+  }
+}

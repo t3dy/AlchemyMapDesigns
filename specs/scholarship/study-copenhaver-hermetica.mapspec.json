@@ -1,0 +1,38 @@
+{
+  "title": "Hermetica",
+  "subtitle": "After Brian Copenhaver (1992) — one manuscript's journey and its Renaissance detonation",
+  "directive": "scholarship map: Hermetica (13 citations in collection)",
+  "scope": {
+    "persons": [
+      "hermes-trismegistus",
+      "marsilio-ficino",
+      "pico-della-mirandola"
+    ],
+    "region_bbox": [
+      8,
+      34,
+      42,
+      48
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1492
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Copenhaver's edition made the Corpus Hermeticum legible again — and told the story of its travel: composed in Roman Egypt, preserved in Byzantium, carried to Florence in 1460, translated by Ficino before Plato because Cosimo wanted Hermes first. This map draws that arc and its Renaissance consequences.",
+    "provenance_note": "Keyed to Brian P. Copenhaver, Hermetica (1992) — 13 event-level citations in this collection. Scope = events involving Hermes Trismegistus (as attributed author), Ficino, or Pico.",
+    "design_note": "Illuminated Manuscript: parchment and gold with Cinzel capitals — the object at the centre of this story is a manuscript, and the map is dressed as one."
+  }
+}

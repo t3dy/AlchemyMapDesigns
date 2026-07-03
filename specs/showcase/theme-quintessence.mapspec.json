@@ -1,0 +1,35 @@
+{
+  "title": "The Quintessence",
+  "subtitle": "The fifth essence and the medicine of long life",
+  "directive": "theme map: quintessence",
+  "scope": {
+    "themes": [
+      "quintessence"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "lapis",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1400
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "John of Rupescissa's quinta essentia turned distillation toward medicine: the incorruptible essence extracted from wine, promising preservation of the body. Watch the idea radiate from 14th-century France.",
+    "provenance_note": "Theme = events tagged 'quintessence' (46 in corpus). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Lapis & Gold: the fifth essence was celestial matter brought down into the still. A night-sky field suits an idea that pointed above the elements."
+  }
+}

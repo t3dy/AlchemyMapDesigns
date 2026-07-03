@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developers Toolkit — MAPRESEARCH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ead8;--panel:#faf4e4;--ink:#2b1d10;--muted:#7a5a36;--accent:#9c2b2b;
+  --gold:#b68c28;--bd:#d8c49a;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"EB Garamond",Georgia,serif;
+  background-image:radial-gradient(ellipse at 20% 0%,#f8f0dc 0%,#f2ead8 55%,#ecdfc4 100%);}
+a{color:var(--accent);}
+header.site{padding:42px 24px 18px;text-align:center;}
+header.site h1{font-family:"Cinzel",Georgia,serif;font-size:clamp(26px,4.5vw,44px);margin:0 0 6px;letter-spacing:.04em;}
+header.site .sub{font-style:italic;color:var(--muted);font-size:17px;max-width:760px;margin:0 auto;}
+.counts{margin:14px auto 0;font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+nav.docs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:22px auto 8px;max-width:900px;}
+nav.docs a{display:block;background:var(--panel);border:1px solid var(--bd);border-radius:10px;
+  padding:10px 18px;text-decoration:none;color:var(--ink);font-size:14.5px;box-shadow:0 4px 14px rgba(60,40,10,.08);}
+nav.docs a b{font-family:"Cinzel",serif;font-size:13px;letter-spacing:.05em;color:var(--accent);display:block;}
+main{max-width:1180px;margin:0 auto;padding:10px 24px 80px;}
+section.family{margin-top:46px;}
+section.family>h2{font-family:"Cinzel",serif;font-size:22px;letter-spacing:.06em;margin:0 0 4px;
+  border-bottom:2px solid var(--bd);padding-bottom:6px;}
+section.family>.blurb{color:var(--muted);font-size:15.5px;font-style:italic;margin:6px 0 12px;max-width:840px;}
+.ideas{margin:0 0 18px;}
+details.idea{background:var(--panel);border:1px solid var(--bd);border-radius:9px;margin:6px 0;overflow:hidden;}
+details.idea summary{cursor:pointer;padding:9px 14px;font-size:14.5px;font-weight:600;list-style:none;}
+details.idea summary::before{content:"❧ ";color:var(--gold);}
+details.idea[open] summary{border-bottom:1px solid var(--bd);background:#f5edd8;}
+details.idea .body{padding:10px 16px 12px;font-size:14.5px;line-height:1.55;}
+details.idea .body p.more{margin:8px 0 0;font-size:13px;color:var(--muted);border-top:1px dashed var(--bd);padding-top:7px;}
+nav.jump{position:sticky;top:0;z-index:9;background:rgba(242,234,216,.94);backdrop-filter:blur(3px);
+  border-bottom:1px solid var(--bd);display:flex;gap:4px;justify-content:center;flex-wrap:wrap;padding:8px 10px;}
+nav.jump a{font-size:12.5px;letter-spacing:.05em;text-decoration:none;color:var(--ink);
+  border:1px solid transparent;border-radius:999px;padding:4px 11px;}
+nav.jump a:hover{border-color:var(--bd);background:var(--panel);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+a.card{display:block;background:var(--panel);border:1px solid var(--bd);border-radius:12px;overflow:hidden;
+  text-decoration:none;color:var(--ink);box-shadow:0 6px 18px rgba(60,40,10,.10);transition:transform .15s,box-shadow .15s;}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(60,40,10,.18);}
+a.card svg{display:block;width:100%;height:auto;border-bottom:1px solid var(--bd);}
+a.card .pad{padding:11px 14px 13px;}
+a.card h3{font-family:"Cinzel",serif;font-size:15.5px;margin:0 0 2px;line-height:1.25;}
+a.card .st{font-size:12.5px;color:var(--muted);font-style:italic;margin:0 0 7px;line-height:1.35;}
+a.card .stats{font-size:11.5px;color:var(--muted);letter-spacing:.03em;}
+a.card .kind{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--bd);border-radius:999px;padding:2px 8px;margin-bottom:7px;}
+.stylebadge{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);border:1px solid var(--bd);border-radius:999px;
+  padding:2px 8px;margin-bottom:7px;}
+.stylebadge .dot{width:10px;height:10px;border-radius:50%;border:2px solid;display:inline-block;}
+.designnote{border-left:3px solid var(--accent);padding:10px 14px;background:var(--panel);
+  font-size:14.5px;line-height:1.5;margin:14px 0;max-width:860px;}
+.swatches{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px auto 0;}
+.swatches .sw{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);
+  letter-spacing:.04em;}
+.swatches .sq{width:22px;height:14px;border-radius:3px;border:1px solid var(--bd);display:inline-block;}
+.relgroup{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:8px 0;}
+.relgroup .rl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  min-width:96px;font-weight:600;}
+a.relchip{display:inline-block;background:var(--panel);border:1px solid var(--bd);border-radius:999px;
+  padding:4px 12px;font-size:13px;text-decoration:none;color:var(--ink);}
+a.relchip:hover{border-color:var(--accent);}
+footer{color:var(--muted);text-align:center;font-size:12.5px;padding:30px 20px 40px;font-style:italic;}
+/* detail + doc pages */
+.crumb{font-size:13.5px;margin:18px 0 8px;}
+.mapframe{width:100%;height:72vh;border:1px solid var(--bd);border-radius:12px;background:#fff;
+  box-shadow:0 10px 30px rgba(60,40,10,.15);}
+.metabar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 4px;font-size:13.5px;}
+.metabar a{background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;text-decoration:none;}
+.prose{background:var(--panel);border:1px solid var(--bd);border-radius:12px;padding:22px 28px;margin:16px 0;
+  line-height:1.6;font-size:16px;}
+.prose h1{font-family:"Cinzel",serif;font-size:26px;}
+.prose h2{font-family:"Cinzel",serif;font-size:19px;border-bottom:1px solid var(--bd);padding-bottom:4px;margin-top:28px;}
+.prose h3{font-size:16.5px;}
+.prose pre{background:#2b2416;color:#f0e6c8;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;}
+.prose code{background:#ece0c2;border-radius:4px;padding:1px 5px;font-size:.9em;}
+.prose pre code{background:none;padding:0;}
+.prose table{border-collapse:collapse;width:100%;font-size:14.5px;}
+.prose th,.prose td{border:1px solid var(--bd);padding:6px 9px;text-align:left;}
+.prose th{background:#f0e5c8;font-family:"Cinzel",serif;font-size:12.5px;letter-spacing:.04em;}
+.provnote{border-left:3px solid var(--gold);padding:8px 14px;background:var(--panel);
+  font-size:14px;color:var(--muted);font-style:italic;margin:14px 0;}
+@media (prefers-reduced-motion: reduce){a.card{transition:none;}}
+</style></head><body><main><div class="crumb"><a href="index.html">← All maps</a></div><div class="prose"><h1 id="the-developers-toolkit">The Developers Toolkit</h1>
+<p>Technical reference for the MAPRESEARCH map toolkit — everything a developer needs to build, extend, test, and embed the maps. The companion document for <em>authors and readers</em> is <a href="MANUAL.md">MANUAL.md</a>; the browsable overview of all built maps is the gallery (<code>gallery/index.html</code>).</p>
+<hr>
+<h2 id="1-architecture">1. Architecture</h2>
+<pre><code>directive (natural language)
+   │  Claude Code skill (/buildmap, /journey, /network)
+   ▼
+MapSpec / journey JSON / networks JSON        ← the CONTRACT (validated)
+   │  Python generator (deterministic)
+   ▼
+self-contained HTML (MapLibre GL + deck.gl)   ← the ARTIFACT
+   │  URL params + postMessage
+   ▼
+embedding surfaces (tour, gallery, any page)</code></pre>
+<p>Three principles hold everywhere:</p>
+<ol><li><strong>The contract is the unit of control.</strong> Nothing renders that isn't in a versionable JSON spec. Change a word, get a different map, reproducibly.</li><li><strong>Provenance or it doesn't compile.</strong> Every engine validates its input and refuses unsourced content (<code>--allow-unsourced</code> for drafts only).</li><li><strong>Artifacts are self-contained.</strong> One HTML file per map, data embedded, no build step, no server-side anything. (CDN libs are the one exception — see §10.)</li></ol>
+<h2 id="2-repository-layout">2. Repository layout</h2>
+<table><thead><tr><th>Path</th><th>What</th></tr></thead><tbody><tr><td><code>scripts/</code></td><td>All engines and tooling (below)</td></tr><tr><td><code>specs/mapspec.schema.json</code></td><td>The MapSpec JSON-Schema</td></tr><tr><td><code>specs/examples/</code></td><td>Hand-authored specs</td></tr><tr><td><code>specs/generated/</code></td><td>Specs authored by <code>build_all.py</code> (eras, centuries)</td></tr><tr><td><code>specs/showcase/</code></td><td>Specs authored by <code>build_showcase.py</code> (themes, figures, regions)</td></tr><tr><td><code>data/journey-*.json</code></td><td>Curated biographical journeys</td></tr><tr><td><code>data/networks.json</code></td><td>Curated network subjects (one file, many subjects)</td></tr><tr><td><code>data/boundaries/</code></td><td>Slimmed historical border GeoJSON by year</td></tr><tr><td><code>prototypes/</code></td><td>Generated map HTML</td></tr><tr><td><code>gallery/</code></td><td>Generated gallery site (index, per-map pages, docs)</td></tr><tr><td><code>tour/</code></td><td>The scrollytelling tour</td></tr></tbody></table>
+<h2 id="3-the-mapspec-contract">3. The MapSpec contract</h2>
+<p>Schema: <code>specs/mapspec.schema.json</code>. Shape:</p>
+<pre><code>{
+  &quot;title&quot;: &quot;…&quot;, &quot;subtitle&quot;: &quot;…&quot;,
+  &quot;directive&quot;: &quot;the original natural-language request&quot;,
+  &quot;scope&quot;: {
+    &quot;year_start&quot;: 1490, &quot;year_end&quot;: 1610,
+    &quot;era&quot;: [&quot;RENAISSANCE&quot;],
+    &quot;regions&quot;: [&quot;Bohemia&quot;], &quot;region_bbox&quot;: [5, 45.5, 19, 54],
+    &quot;themes&quot;: [&quot;paracelsian-alchemy&quot;], &quot;persons&quot;: [], &quot;texts&quot;: [],
+    &quot;review_status&quot;: []
+  },
+  &quot;render&quot;: {
+    &quot;engine&quot;: &quot;maplibre&quot;,
+    &quot;basemap&quot;: { &quot;style&quot;: &quot;atlas&quot;, &quot;show_modern_labels&quot;: false,
+                 &quot;historical_boundaries_year&quot;: 1560 },
+    &quot;layers&quot;: [&quot;points&quot;, &quot;flows&quot;, &quot;time-animation&quot;, &quot;labels&quot;],
+    &quot;color_by&quot;: &quot;theme&quot;
+  },
+  &quot;narrative&quot;: { &quot;intro&quot;: &quot;…&quot;, &quot;provenance_note&quot;: &quot;REQUIRED&quot; }
+}</code></pre>
+<p>Rules enforced by <code>build_map.py</code> (see <code>validate_spec()</code>):</p>
+<ul><li><code>title</code>, <code>scope</code>, <code>render</code>, and <code>narrative.provenance_note</code> are required.</li><li>Enums checked: <code>era</code>, <code>layers</code>, <code>color_by</code>, <code>basemap.style</code>.</li><li><code>basemap.style</code> sets the map's <strong>initial runtime theme</strong>: <code>atlas</code>, <code>copperplate</code>, <code>illuminated</code>, <code>noir</code> (legacy aliases: <code>parchment</code>→illuminated, <code>sepia-toner</code>→copperplate, <code>muted-vector</code>/<code>modern-osm</code>→atlas).</li><li><code>historical_boundaries_year</code> embeds period borders from the <strong>nearest cached year</strong> in <code>data/boundaries/</code> and adds an automatic caveat to the panel.</li><li>Inverted <code>year_start</code>/<code>year_end</code> and malformed/inverted <code>region_bbox</code> are errors.</li><li>Unknown keys warn (forward compatibility) but don't fail.</li><li>Post-compile, the engine warns when a requested theme matches 0 events and when events reference ungeocoded locations.</li></ul>
+<h2 id="4-engines-cli-reference">4. Engines &amp; CLI reference</h2>
+<p>All engines are dependency-free Python 3 (stdlib only). Run from <code>scripts/</code>.</p>
+<h3 id="build-map-py-the-mapspec-compiler">build_map.py — the MapSpec compiler</h3>
+<pre><code>python build_map.py &lt;spec.mapspec.json&gt; [--data &lt;data.json&gt;] [--out &lt;out.html&gt;] [--allow-unsourced]</code></pre>
+<p>Validates, compiles (filter/join/aggregate), emits self-contained HTML into <code>prototypes/&lt;spec-stem&gt;.html</code>. Key internals: <code>validate_spec(spec)</code>, <code>check_provenance(spec)</code>, <code>compile_spec(spec, data)</code>, <code>emit_html(compiled)</code> — importable, which is how the batch builders and tests use them.</p>
+<h3 id="build-all-py-eras-centuries-batch">build_all.py — eras + centuries batch</h3>
+<p>Authors 6 era + 11 century specs to <code>specs/generated/</code>, builds each, and writes <code>tour/manifest.json</code> for the scrollytelling tour.</p>
+<h3 id="build-showcase-py-themes-figures-regions-batch">build_showcase.py — themes + figures + regions batch</h3>
+<p>Authors the 21 showcase specs (7 theme, 8 figure, 6 region) to <code>specs/showcase/</code> and builds each. Slugs and counts were chosen against <code>list_vocab.py</code> output so no map compiles empty.</p>
+<h3 id="build-scholarship-py-the-scholarship-shelf">build_scholarship.py — the scholarship shelf</h3>
+<p>Authors one map per most-cited study in the collection (citation counts mined from scholar-surname mentions across the 680 events' texts). Each spec scopes the corpus to the study's key topics/figures, wears a deliberately different style, and carries a <code>design_note</code> explaining the choice. Specs to <code>specs/scholarship/</code>.</p>
+<h3 id="build-journey-py-the-biographical-journey-template">build_journey.py — the biographical journey template</h3>
+<pre><code>python build_journey.py ../data/journey-&lt;person&gt;.json [--out …] [--allow-unsourced]</code></pre>
+<p>Validates each stop (<code>place/lat/lon/year_start/what/evidence/source</code> required; evidence ∈ attested|inferred|approximate; stops must be year-ordered) and emits the self-drawing, ending-withholding journey map.</p>
+<h3 id="build-network-py-the-network-patronage-template">build_network.py — the network/patronage template</h3>
+<pre><code>python build_network.py [--data ../data/networks.json] [--out …] [--allow-unsourced]</code></pre>
+<p>Validates every subject (unique node ids; edges resolve to nodes; edges carry <code>type/evidence/note/survives</code>) and emits ONE explorer for all subjects (<code>?subject=&lt;slug&gt;</code> deep-links).</p>
+<h3 id="fetch-basegeo-py-the-physical-geography-cache">fetch_basegeo.py — the physical geography cache</h3>
+<pre><code>python fetch_basegeo.py</code></pre>
+<p>Downloads Natural Earth land / lakes / major rivers (public domain), clips to the project window (Sutherland–Hodgman for polygons, Liang–Barsky for lines), simplifies, and writes ~700 KB total to <code>data/basegeo/</code>. Every map embeds these three layers and draws them itself — sea-coloured canvas, themed land fill, coastline stroke, lakes, rivers — so there is <strong>no CDN basemap dependency</strong>. Run once; the compilers warn if the cache is missing.</p>
+<h3 id="fetch-boundaries-py-the-period-borders-cache">fetch_boundaries.py — the period-borders cache</h3>
+<pre><code>python fetch_boundaries.py [year …]</code></pre>
+<p>Downloads <code>world_&lt;year&gt;.geojson</code> from aourednik/historical-basemaps, clips to the project window, Douglas-Peucker-simplifies, rounds coordinates, keeps only <code>NAME</code>, and writes ~75–145 KB files to <code>data/boundaries/</code>. Run once per new year needed; the compiler snaps requests to the nearest cached year.</p>
+<h3 id="list-vocab-py-the-authoring-vocabulary">list_vocab.py — the authoring vocabulary</h3>
+<p>Prints every concept/person/region slug <strong>with its event count</strong> plus schema enums. Zero-count slugs are flagged. Always consult before authoring a spec.</p>
+<h3 id="build-gallery-py-the-gallery-site">build_gallery.py — the gallery site</h3>
+<p>Scans all specs + curated data, compiles each map's data for an SVG preview, and emits <code>gallery/index.html</code>, one <code>gallery/&lt;slug&gt;.html</code> detail page per map, and HTML versions of TOOLKIT.md / MANUAL.md. Re-run after adding any map.</p>
+<h3 id="test-smoke-py-the-regression-net">test_smoke.py — the regression net</h3>
+<p>Dependency-free suite; see §9.</p>
+<h2 id="5-data-formats-curated-layers">5. Data formats (curated layers)</h2>
+<h3 id="journey-json-data-journey-json">Journey JSON (<code>data/journey-*.json</code>)</h3>
+<pre><code>{ &quot;title&quot;: &quot;…&quot;, &quot;subtitle&quot;: &quot;…&quot;, &quot;subject&quot;: &quot;person-slug&quot;, &quot;theme&quot;: &quot;noir&quot;,
+  &quot;provenance_note&quot;: &quot;REQUIRED — biographies used, what is reconstructed&quot;,
+  &quot;stops&quot;: [
+    { &quot;order&quot;: 1, &quot;place&quot;: &quot;Basel&quot;, &quot;lat&quot;: 47.5596, &quot;lon&quot;: 7.5886,
+      &quot;year_start&quot;: 1527, &quot;year_end&quot;: 1528, &quot;dwell&quot;: 1,
+      &quot;what&quot;: &quot;1–3 sentences of story for the panel.&quot;,
+      &quot;evidence&quot;: &quot;attested&quot;,          // this stop
+      &quot;leg_evidence&quot;: &quot;inferred&quot;,      // the travel TO this stop (null for first)
+      &quot;source&quot;: &quot;Webster 2008, ch.2&quot; }
+  ] }</code></pre>
+<p><code>dwell</code> scales node size; <code>leg_evidence: inferred|approximate</code> renders dashed.</p>
+<h3 id="network-json-data-networks-json">Network JSON (<code>data/networks.json</code>)</h3>
+<p>One file, <code>subjects[]</code>. Each subject: <code>slug</code>, <code>title</code>, <code>subtitle</code>, <code>theme</code>, <code>provenance_note</code>, <code>nodes[]</code> (<code>id</code>, <code>label</code>, <code>slug</code> (person page link or null), <code>lat</code>, <code>lon</code>, <code>role</code>, <code>year</code>), <code>edges[]</code>:</p>
+<pre><code>{ &quot;source&quot;: &quot;id&quot;, &quot;target&quot;: &quot;id&quot;, &quot;type&quot;: &quot;patron-of&quot;,
+  &quot;direction&quot;: true, &quot;weight&quot;: 3, &quot;evidence&quot;: &quot;attested&quot;,
+  &quot;survives&quot;: true, &quot;note&quot;: &quot;citation / claim (REQUIRED)&quot; }</code></pre>
+<p>Edge types with assigned colours: patron-of, collaborated, cited, collected, corresponded, influenced, polemicized-against, taught, studied-under. <code>survives</code> drives the survival-bias toggle — set it honestly.</p>
+<h3 id="boundary-cache-data-boundaries-world-year-geojson">Boundary cache (<code>data/boundaries/world_&lt;year&gt;.geojson</code>)</h3>
+<p>FeatureCollection with <code>year</code> and <code>attribution</code> top-level keys; features carry only <code>NAME</code>. Approximate by nature — every map that shows them says so.</p>
+<h2 id="6-runtime-apis-every-emitted-map">6. Runtime APIs (every emitted map)</h2>
+<h3 id="url-parameters">URL parameters</h3>
+<table><thead><tr><th>Param</th><th>Maps</th><th>Meaning</th></tr></thead><tbody><tr><td><code>ui=min</code></td><td>all</td><td>hide chrome (embedding)</td></tr><tr><td><code>theme=</code></td><td>all</td><td>atlas · copperplate · illuminated · noir</td></tr><tr><td><code>year=</code></td><td>data</td><td>time-scrubber position</td></tr><tr><td><code>lens=</code></td><td>data</td><td>transmission · lives · texts · themes · density</td></tr><tr><td><code>color=</code></td><td>data</td><td>theme · region · era</td></tr><tr><td><code>layers=</code></td><td>data</td><td>dot-separated: <code>points.arcs.borders</code></td></tr><tr><td><code>arcw=</code> <code>pts=</code> <code>op=</code></td><td>data</td><td>slider values (arc width, point scale, opacity)</td></tr><tr><td><code>subject=</code></td><td>network</td><td>subject slug</td></tr><tr><td><code>survive=1</code></td><td>network</td><td>survival toggle on</td></tr><tr><td><code>mode=</code></td><td>journey</td><td>lay · understated · scholar · centerpiece</td></tr></tbody></table>
+<h3 id="postmessage-embedding">postMessage (embedding)</h3>
+<p>Send to the iframe: <code>{type:"mapctl", theme, lens, year, colorBy}</code> · <code>{type:"journeyctl", goto, mode, theme, play}</code> · <code>{type:"netctl", subject, theme, survive, select}</code>.</p>
+<h3 id="debug-globals">Debug globals</h3>
+<p>Every map exposes <code>window._map</code> (MapLibre), <code>window._overlay</code> (deck.gl overlay), <code>window._STATE</code> (live state object) for console inspection and tests.</p>
+<h2 id="7-the-theme-engine">7. The theme engine</h2>
+<p>Six themes: <strong>atlas</strong> (Modern Atlas), <strong>copperplate</strong> (Copperplate Engraving), <strong>illuminated</strong> (Illuminated Manuscript), <strong>noir</strong> (Alchemical Noir), <strong>woodcut</strong> (Woodcut &amp; Rubric — stark black line + vermillion on cream), and <strong>lapis</strong> (Lapis &amp; Gold — ultramarine field + gilt). Themes are token objects in the emitted JS (<code>THEMES</code> in the template): page, ink, muted, panel, panel-border, accent, chip, fonts, water/land/border basemap colours, and a 10-colour categorical palette. To add a theme: add one entry to <code>THEMES</code> in <code>build_map.py</code>'s template (and the option to the theme <code>&lt;select&gt;</code>), plus the alias in <code>STYLE_TO_THEME</code> so specs can request it, and a matching entry in <code>build_gallery.py</code>'s <code>PALETTE</code>/<code>THEME_LABEL</code>/<code>WATER</code> so previews and badges follow. Colour is assigned at runtime, so new themes re-skin existing maps without recompiling their data.</p>
+<p>House rule (see the memory note and <code>narrative.design_note</code>): batch builders assign each map an <em>initial</em> style deliberately — the fleet doubles as a design showcase — and the gallery surfaces the rationale on every map page.</p>
+<h2 id="8-extending">8. Extending</h2>
+<p><strong>A new layer</strong> (data maps): add a deck.gl layer constructor in <code>makeLayers()</code>, a key in <code>STATE.layers</code>, and (optionally) a chip in <code>buildControls()</code> — follow the <code>borders</code> layer as the worked example (conditional on data presence).</p>
+<p><strong>A new map type</strong>: copy the closest engine (journey is the smallest), keep the three invariants — validated contract in, self-contained HTML out, provenance enforced — and give it a <code>?ui=min</code> mode plus a postMessage handler so the tour and gallery can drive it.</p>
+<p><strong>A new dataset</strong>: currently hard-coupled to ALCHEMYTIMELINEMAP's <code>data.json</code> (<code>--data</code> flag notwithstanding, field names are assumed). The adapter design is NEXTSTEPS.md Tier 1 §2 — read that before attempting.</p>
+<h2 id="9-testing-qa">9. Testing &amp; QA</h2>
+<pre><code>python scripts/test_smoke.py</code></pre>
+<p>Every spec on disk must: validate, carry provenance, compile to &gt;0 events, emit HTML with no unreplaced tokens and with the export/permalink/reduced-motion machinery present, and (if it requests borders) embed them. Plus: the validator must reject a deliberately bad spec; the boundary cache must exist, parse, and stay under 300 KB/file; journey and network data must pass their evidence rules; the tour manifest and gallery must agree with the prototypes on disk.</p>
+<p>The suite is structural — WebGL rendering is verified manually in a browser (the sandbox cannot screenshot WebGL; see NEXTSTEPS.md §7 for the visual-QA plan).</p>
+<h2 id="10-dependencies-archival-caveats">10. Dependencies &amp; archival caveats</h2>
+<p>Runtime (CDN, pinned): MapLibre GL 4.7.1 and deck.gl 9.0.33 JS, plus Google Fonts. The basemap itself is <strong>fully embedded</strong> (Natural Earth geography + historical borders live inside each HTML file), so an offline map still shows land, sea, lakes, rivers, and borders — but the JS libraries still need vendoring for true archival use (NEXTSTEPS.md Tier 2 §4). Build-time: Python 3 stdlib only — nothing to install.</p>
+<p>Historical boundaries are from aourednik/historical-basemaps (approximate scholarly reconstructions); physical geography is Natural Earth (public domain). Attribution is embedded in every cache file and every map.</p></div></main><footer>MAPRESEARCH — an R&amp;D project in honest, directable historical cartography. Borders are approximate; absence is absence of record; the maps say so.</footer></body></html>

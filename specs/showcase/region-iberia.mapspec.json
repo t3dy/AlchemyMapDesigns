@@ -1,0 +1,36 @@
+{
+  "title": "Iberian Crossroads",
+  "subtitle": "Translation, transmission, and the pseudo-Lullian corpus",
+  "directive": "region map: Iberia, Catalonia",
+  "scope": {
+    "regions": [
+      "Iberia",
+      "Catalonia"
+    ],
+    "region_bbox": [
+      -10,
+      35,
+      4.5,
+      44.5
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "atlas",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1200
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Toledo and the translation movement made Iberia the door through which Arabic alchemy entered Latin Europe; later the peninsula grew its own pseudo-Lullian tradition.",
+    "provenance_note": "Regions = 'Iberia' (40 events) + 'Catalonia' (1). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Modern Atlas: the translation crossroads needs maximum legibility — routes and centres read plainly, nothing ornamental in the way."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "title": "The Alchemical Corpus Attributed to Raymond Lull",
+  "subtitle": "After Michela Pereira (1989) — a corpus its author never wrote",
+  "directive": "scholarship map: The Alchemical Corpus Attributed to Raymond Lull (8 citations in collection)",
+  "scope": {
+    "persons": [
+      "raymond-lull",
+      "arnaud-de-villanova",
+      "john-of-rupescissa"
+    ],
+    "region_bbox": [
+      -10,
+      35,
+      20,
+      52
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "woodcut",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1400
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Pereira mapped a paradox: medieval Europe's most influential alchemical corpus is attributed to a man who denounced alchemy. The pseudo-Lullian writings grew in the Catalan-Provençal world of Arnau de Vilanova and Rupescissa's prophetic pharmacy. A deliberately thin map of a deliberately slippery corpus.",
+    "provenance_note": "Keyed to Michela Pereira, The Alchemical Corpus Attributed to Raymond Lull (1989) — 8 event-level citations in this collection. Scope = events involving Lull, Arnau de Vilanova, or John of Rupescissa; the corpus's pseudepigraphy means every attribution here is the *tradition's* claim, not the map's.",
+    "design_note": "Woodcut & Rubric: the pseudo-Lullian corpus lived through late-medieval and early-print copying — black letter and red rubric. The sparse, high-contrast page makes the thinness of the evidence part of the picture."
+  }
+}

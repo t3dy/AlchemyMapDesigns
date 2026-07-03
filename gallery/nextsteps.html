@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Next Steps — MAPRESEARCH</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ead8;--panel:#faf4e4;--ink:#2b1d10;--muted:#7a5a36;--accent:#9c2b2b;
+  --gold:#b68c28;--bd:#d8c49a;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"EB Garamond",Georgia,serif;
+  background-image:radial-gradient(ellipse at 20% 0%,#f8f0dc 0%,#f2ead8 55%,#ecdfc4 100%);}
+a{color:var(--accent);}
+header.site{padding:42px 24px 18px;text-align:center;}
+header.site h1{font-family:"Cinzel",Georgia,serif;font-size:clamp(26px,4.5vw,44px);margin:0 0 6px;letter-spacing:.04em;}
+header.site .sub{font-style:italic;color:var(--muted);font-size:17px;max-width:760px;margin:0 auto;}
+.counts{margin:14px auto 0;font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+nav.docs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:22px auto 8px;max-width:900px;}
+nav.docs a{display:block;background:var(--panel);border:1px solid var(--bd);border-radius:10px;
+  padding:10px 18px;text-decoration:none;color:var(--ink);font-size:14.5px;box-shadow:0 4px 14px rgba(60,40,10,.08);}
+nav.docs a b{font-family:"Cinzel",serif;font-size:13px;letter-spacing:.05em;color:var(--accent);display:block;}
+main{max-width:1180px;margin:0 auto;padding:10px 24px 80px;}
+section.family{margin-top:46px;}
+section.family>h2{font-family:"Cinzel",serif;font-size:22px;letter-spacing:.06em;margin:0 0 4px;
+  border-bottom:2px solid var(--bd);padding-bottom:6px;}
+section.family>.blurb{color:var(--muted);font-size:15.5px;font-style:italic;margin:6px 0 12px;max-width:840px;}
+.ideas{margin:0 0 18px;}
+details.idea{background:var(--panel);border:1px solid var(--bd);border-radius:9px;margin:6px 0;overflow:hidden;}
+details.idea summary{cursor:pointer;padding:9px 14px;font-size:14.5px;font-weight:600;list-style:none;}
+details.idea summary::before{content:"❧ ";color:var(--gold);}
+details.idea[open] summary{border-bottom:1px solid var(--bd);background:#f5edd8;}
+details.idea .body{padding:10px 16px 12px;font-size:14.5px;line-height:1.55;}
+details.idea .body p.more{margin:8px 0 0;font-size:13px;color:var(--muted);border-top:1px dashed var(--bd);padding-top:7px;}
+nav.jump{position:sticky;top:0;z-index:9;background:rgba(242,234,216,.94);backdrop-filter:blur(3px);
+  border-bottom:1px solid var(--bd);display:flex;gap:4px;justify-content:center;flex-wrap:wrap;padding:8px 10px;}
+nav.jump a{font-size:12.5px;letter-spacing:.05em;text-decoration:none;color:var(--ink);
+  border:1px solid transparent;border-radius:999px;padding:4px 11px;}
+nav.jump a:hover{border-color:var(--bd);background:var(--panel);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+a.card{display:block;background:var(--panel);border:1px solid var(--bd);border-radius:12px;overflow:hidden;
+  text-decoration:none;color:var(--ink);box-shadow:0 6px 18px rgba(60,40,10,.10);transition:transform .15s,box-shadow .15s;}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(60,40,10,.18);}
+a.card svg{display:block;width:100%;height:auto;border-bottom:1px solid var(--bd);}
+a.card .pad{padding:11px 14px 13px;}
+a.card h3{font-family:"Cinzel",serif;font-size:15.5px;margin:0 0 2px;line-height:1.25;}
+a.card .st{font-size:12.5px;color:var(--muted);font-style:italic;margin:0 0 7px;line-height:1.35;}
+a.card .stats{font-size:11.5px;color:var(--muted);letter-spacing:.03em;}
+a.card .kind{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--bd);border-radius:999px;padding:2px 8px;margin-bottom:7px;}
+.stylebadge{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);border:1px solid var(--bd);border-radius:999px;
+  padding:2px 8px;margin-bottom:7px;}
+.stylebadge .dot{width:10px;height:10px;border-radius:50%;border:2px solid;display:inline-block;}
+.designnote{border-left:3px solid var(--accent);padding:10px 14px;background:var(--panel);
+  font-size:14.5px;line-height:1.5;margin:14px 0;max-width:860px;}
+.swatches{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px auto 0;}
+.swatches .sw{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);
+  letter-spacing:.04em;}
+.swatches .sq{width:22px;height:14px;border-radius:3px;border:1px solid var(--bd);display:inline-block;}
+.relgroup{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:8px 0;}
+.relgroup .rl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  min-width:96px;font-weight:600;}
+a.relchip{display:inline-block;background:var(--panel);border:1px solid var(--bd);border-radius:999px;
+  padding:4px 12px;font-size:13px;text-decoration:none;color:var(--ink);}
+a.relchip:hover{border-color:var(--accent);}
+footer{color:var(--muted);text-align:center;font-size:12.5px;padding:30px 20px 40px;font-style:italic;}
+/* detail + doc pages */
+.crumb{font-size:13.5px;margin:18px 0 8px;}
+.mapframe{width:100%;height:72vh;border:1px solid var(--bd);border-radius:12px;background:#fff;
+  box-shadow:0 10px 30px rgba(60,40,10,.15);}
+.metabar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 4px;font-size:13.5px;}
+.metabar a{background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;text-decoration:none;}
+.prose{background:var(--panel);border:1px solid var(--bd);border-radius:12px;padding:22px 28px;margin:16px 0;
+  line-height:1.6;font-size:16px;}
+.prose h1{font-family:"Cinzel",serif;font-size:26px;}
+.prose h2{font-family:"Cinzel",serif;font-size:19px;border-bottom:1px solid var(--bd);padding-bottom:4px;margin-top:28px;}
+.prose h3{font-size:16.5px;}
+.prose pre{background:#2b2416;color:#f0e6c8;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;}
+.prose code{background:#ece0c2;border-radius:4px;padding:1px 5px;font-size:.9em;}
+.prose pre code{background:none;padding:0;}
+.prose table{border-collapse:collapse;width:100%;font-size:14.5px;}
+.prose th,.prose td{border:1px solid var(--bd);padding:6px 9px;text-align:left;}
+.prose th{background:#f0e5c8;font-family:"Cinzel",serif;font-size:12.5px;letter-spacing:.04em;}
+.provnote{border-left:3px solid var(--gold);padding:8px 14px;background:var(--panel);
+  font-size:14px;color:var(--muted);font-style:italic;margin:14px 0;}
+@media (prefers-reduced-motion: reduce){a.card{transition:none;}}
+</style></head><body><main><div class="crumb"><a href="index.html">← All maps</a></div><div class="prose"><h1 id="nextsteps-moving-the-map-toolkit-from-application-to-module">NEXTSTEPS — moving the map toolkit from application to module</h1>
+<p>Written at the close of the Fable review sprint (July 2026), which checked the work recorded in <code>NEWFEATURES.md</code> against the vision in <code>AUDIT.md</code> and shipped ten improvements (list at the bottom). This file is the forward plan: what to do next, in what order, and why.</p>
+<p><strong>Where we stand in one sentence:</strong> the <em>rendering and honesty craft</em> is now largely done and defended by tests; the two things gating the vision are the <strong>data underneath</strong> and <strong>decoupling from ALCHEMYTIMELINEMAP</strong> — both unglamorous, both now unmistakably the critical path.</p>
+<hr>
+<h2 id="tier-1-the-critical-path-do-these-before-more-features">Tier 1 — the critical path (do these before more features)</h2>
+<h3 id="1-corpus-theme-re-tagging-the-load-bearing-data-fix">1. Corpus theme re-tagging (the load-bearing data fix)</h3>
+<p>The Themes lens is still mostly empty because events carry process labels (<code>distillation</code> 237) while conceptual themes go unused (<code>iatrochemistry</code> 2 — the compiler now <em>warns</em> about this at build time, but warning ≠ fixed).</p>
+<ul><li>Run a verifier-gated agent sweep over the 602 events in the ALCHEMYTIMELINEMAP DB: propose 1–3 conceptual theme tags per event, <strong>each with a source line</strong>, then a second-pass verifier accepts/rejects. Reject unsourced tags outright — same rule the map engines now enforce.</li><li>Acceptance test: <code>python scripts/list_vocab.py</code> shows the top ~15 conceptual themes with ≥20 events each; the Paracelsian example map stops warning.</li><li>This unlocks: honest theme maps, meaningful <code>color_by: theme</code>, and the <code>/buildmap</code> skill working as designed for theme-led directives.</li></ul>
+<h3 id="2-decouple-into-a-module-the-stated-vision">2. Decouple into a module (the stated vision)</h3>
+<p>Everything reads a hard-coded path into <code>../ALCHEMYTIMELINEMAP/site/data/data.json</code> and assumes its field names. To be a DH <em>module</em>:</p>
+<ul><li><strong>Data adapter</strong>: a small <code>project.config.json</code> per dataset mapping the engine's expected fields (<code>events[].date_start_year</code>, <code>location_slug</code>, <code>concepts_involved</code>, …) onto whatever the host dataset calls them, plus entity file paths. The engines read <em>only</em> through the adapter.</li><li>Move <code>FALLBACK_LOCATIONS</code>, <code>LOCATION_ALIASES</code>, <code>ERA_RANGES</code> out of <code>build_map.py</code> into that config (they are alchemy-project data, not engine code).</li><li>Acceptance test: point the adapter at a <em>second</em> dataset (even a toy one — a dozen PKD-site events, or an EmblemRoguelike gazetteer) and get a working map with zero engine edits. That's the moment it's a module, not an app.</li><li>Then: package <code>scripts/</code> as an installable (<code>pip install dh-mapkit</code> shape), with <code>data/boundaries/</code> as a fetchable resource.</li></ul>
+<h3 id="3-prove-the-skills-at-scale-largely-done-gallery-sprint-july-2026">3. Prove the skills at scale — ✅ largely done (gallery sprint, July 2026)</h3>
+<p>The authoring loop has now been stress-tested at scale: 21 new data maps (themes/figures/regions via <code>build_showcase.py</code>), the Paracelsus and Dee journeys, and the Hartlib-circle and Ficino-circle networks all authored against the enforcement machinery — vocab counts steered slug choices, and no map shipped empty or unsourced. What remains of this item: run the <em>skills themselves</em> cold (<code>/buildmap</code> etc. driven conversationally rather than by batch script) on a handful of directives, since the batch path exercises the engines but not the natural-language translation step.</p>
+<hr>
+<h2 id="tier-2-high-value-now-cheap-foundations-exist">Tier 2 — high-value, now cheap (foundations exist)</h2>
+<h3 id="4-vendor-the-cdn-dependencies-archival-integrity">4. Vendor the CDN dependencies (archival integrity)</h3>
+<p>Maps die when unpkg does. Add <code>scripts/vendor_libs.py</code> to download pinned MapLibre/deck.gl/fonts into <code>vendor/</code>, and a <code>--offline</code> flag on the three builders that rewrites the <code>&lt;script&gt;</code>/<code>&lt;link&gt;</code> tags to relative paths. A DH artifact should still open in ten years. (~half a day; do it before sharing maps outside the project.)</p>
+<h3 id="5-port-accessibility-to-journey-network-templates">5. Port accessibility to journey + network templates</h3>
+<p>Data maps now honour <code>prefers-reduced-motion</code>, carry ARIA roles, and have keyboard-operable chips. The journey autoplay (a pure animation) and the network click-to-pivot need the same treatment — reduced-motion should turn the journey into stepped storytelling (the Next ▸ button already exists), and pivot needs a keyboard path. Reuse the exact patterns just added to <code>build_map.py</code>.</p>
+<h3 id="6-extend-the-boundary-cache-thoughtfully">6. Extend the boundary cache thoughtfully</h3>
+<ul><li>Add pre-100 CE years (the Greco-Egyptian era starts at 100; <code>world_bc1</code> etc. exist upstream) and any council-relevant years a directive asks for.</li><li>Consider a "borders drift" affordance: on century maps, the time scrubber could swap the embedded boundary year at era breakpoints. Do this only if a real map needs it — it doubles embedded size per extra year.</li><li>Keep the caveat language exactly as is: approximate, orientation-only.</li></ul>
+<h3 id="7-visual-qa-outside-the-sandbox">7. Visual QA outside the sandbox</h3>
+<p>The 23-check smoke suite is structural; nobody has verified pixels automatically. On a machine with working WebGL screenshots: a small Playwright script that opens each prototype, waits for <code>map.loaded()</code>, screenshots, and diffs against goldens. Store goldens per theme. (The sandbox limitation is environmental — this needs a real browser run, so it may be a manual-trigger script rather than CI.)</p>
+<hr>
+<h2 id="tier-3-polish-and-reach-after-the-module-exists">Tier 3 — polish and reach (after the module exists)</h2>
+<ol><li><strong>PDF/SVG export</strong> — PNG with provenance strip exists; scholars will want vector for print. deck.gl doesn't do SVG; the honest path is a high-DPI PNG (render at 2–3× and downscale) plus a separate typeset caption block.</li><li><strong>Saved views / annotations</strong> — the permalink now captures full view state; a "named views" panel (localStorage + exportable JSON) would let an author script a lecture from one map.</li><li><strong>Historical gazetteer</strong> — period place names (Byzantion → Constantinople) keyed by year, as a <code>labels</code> layer variant; Pleiades/GeoNames-historical as sources. Pairs naturally with the borders layer.</li><li><strong>Tour chapter for the borders layer</strong> — the scrollytelling tour predates period borders; add a chapter showing the same map with modern-vs-1530 borders (the postMessage API can already drive the toggle: add <code>layers</code> to the <code>mapctl</code> handler if needed).</li><li><strong>Edge-enrichment pipeline</strong> — longer term: mine the corpus texts/letters for candidate person-person edges, emitted as <em>suggestions</em> into a review queue, never directly onto maps. The curated-with-provenance rule stays.</li></ol>
+<hr>
+<h2 id="standing-rules-unchanged-now-partially-machine-enforced">Standing rules (unchanged, now partially machine-enforced)</h2>
+<ul><li>Provenance-or-it-doesn't-compile — <strong>enforced</strong> in all three engines.</li><li>Evidence → line style; confidence → opacity; category → colour; never colour-for-confidence.</li><li>Journeys and networks are curated layers with sources, not corpus dumps.</li><li>Every map says what it does <em>not</em> show.</li><li>Run <code>python scripts/test_smoke.py</code> after touching any engine; keep it green.</li></ul>
+<hr>
+<h2 id="appendix-b-what-the-gallery-sprint-shipped-july-2026-second-pass">Appendix B — what the gallery sprint shipped (July 2026, second pass)</h2>
+<ol><li><strong>25 new maps</strong> (43 prototypes total): 7 theme maps, 8 figure maps, 6 region maps (<code>scripts/build_showcase.py</code>, specs in <code>specs/showcase/</code>), 2 new curated journeys (Paracelsus after Webster/Ball/Pagel; John Dee after Parry/French), and 2 new network constellations (the Hartlib Circle after the Hartlib Papers and Newman &amp; Principe; the Florentine Academy after Hankins and Copenhaver) — every one borders-enabled, sourced, and validation-clean.</li><li><strong>The Map Gallery</strong> (<code>gallery/</code>, generated by <code>scripts/build_gallery.py</code>): 48 preview cards in eight families, each with a deterministic SVG preview drawn from the map's own compiled data; 48 per-map pages with the live embedded map, stats, provenance, recipe link, and accordion notes; a shared registry of 16 "ideas we're trying" wired to families and pages.</li><li><strong>TOOLKIT.md</strong> (Developers Toolkit) and <strong>MANUAL.md</strong> (Instruction Manual), also served as HTML inside the gallery via a built-in markdown renderer.</li><li><strong>Test suite grown to 47 checks</strong> — now covers all journeys, the new specs automatically, and gallery completeness (every map must have a card and page).</li><li>Verified in a live browser session: gallery DOM, docs rendering, and an embedded map initializing inside a gallery page (state, lenses, borders, export button all live).</li></ol>
+<p>5b. <em>(variety pass)</em> <strong>Visual variety as policy.</strong> Two new themes (Woodcut &amp;    Rubric; Lapis &amp; Gold → six total); every generated map now <em>opens</em> in a    deliberately assigned style with a <code>narrative.design_note</code> explaining how the    aesthetic serves the material (era maps: one style each; centuries: rotating    wardrobe; showcase/figures/regions: hand-assigned; distribution 8–12 maps per    style). The gallery shows a style badge on every card, a Design-&amp;-Tools block    on every page (which deck.gl layers, borders year, interactions), a six-swatch    strip in the hero, and two new idea accordions (style-as-argument,    scholarship-maps). Plus <strong>the Scholarship Shelf</strong>: 7 maps keyed to the    collection's most-cited studies (mined from scholar-surname mentions across    events: Principe 90 · Newman 60 · Smith 21 · Hanegraaff 19 · Fowden 15 ·    Copenhaver 13 · Pereira 8), incl. the requested <em>Laboratories of Art</em> /    Pamela Smith artisanal-culture map. 57 maps, 58 checks green. Preference    recorded in memory (demo-visual-variety).</p>
+<ol><li><em>(basemap pass)</em> <strong>"I want it to look like a map" — fixed.</strong> All 44 prototypes now embed real physical geography (Natural Earth land, lakes, major rivers via <code>scripts/fetch_basegeo.py</code>: window-clipped, simplified, ~700 KB) drawn as themed deck.gl layers over a sea-coloured canvas, with place labels on by default. The demotiles CDN basemap — flat, featureless, and a single point of failure — is <strong>gone entirely</strong>; the smoke suite now fails if it, or a geography-less map, ever comes back. Gallery preview cards gained the same land silhouettes. Remaining basemap gap (recorded in AUDIT.md): the geography is modern, and there is no historical gazetteer.</li><li><em>(continuation pass)</em> Two cold-run directed maps — <strong>Women in the Art</strong> (sparsity-as-argument: 8 events, 5 women, the gendered survival of evidence) and <strong>The Byzantine Bridge</strong> (Byzantium as the tradition's cold storage) — exercising the hand-authored spec path end-to-end, which surfaced and fixed a real bug (gallery iframes 404'd for <code>*.mapspec.html</code>-named prototypes; the smoke suite now asserts every gallery iframe target exists). Gallery gained a sticky family jump-nav, "Read more" links from every idea accordion into anchored Toolkit/Manual sections, and an HTML NEXTSTEPS page; the tour now links to the gallery at top and close, and its stale "period boundaries = future work" claim is corrected. 50 maps, 49 checks green.</li></ol>
+<h2 id="appendix-a-what-the-fable-review-sprint-shipped-july-2026">Appendix A — what the Fable review sprint shipped (July 2026)</h2>
+<ol><li><strong>Period political borders, wired end-to-end</strong> — <code>scripts/fetch_boundaries.py</code> downloads and slims historical-basemaps GeoJSON (Douglas-Peucker + precision rounding + window clip; 24 years cached, 100–1800 CE, ~75–145 KB each); <code>historical_boundaries_year</code> now embeds the nearest cached year as a toggleable, hoverable "Borders" layer with an automatic provenance caveat. All 17 generated maps + the example carry period borders.</li><li><strong>Provenance enforcement</strong> — missing <code>narrative.provenance_note</code> fails the build (<code>build_map.py</code>, <code>build_all.py</code>); unsourced journey stops and untyped/ unevidenced network edges fail theirs (<code>validate_journey</code>, <code>validate_network</code>). <code>--allow-unsourced</code> escape hatch for drafts, loudly labelled.</li><li><strong>MapSpec validation</strong> — dependency-free <code>validate_spec()</code>: enum checks, inverted year/bbox detection, unknown-key warnings; exercised by tests.</li><li><strong>Spec-driven appearance</strong> — <code>render.basemap.style</code> (now incl. atlas/ copperplate/illuminated/noir; legacy names aliased) sets the initial theme, <code>show_modern_labels</code> the label state. Previously dead schema fields.</li><li><strong>PNG export</strong> — one click, current view, title + "through year" + borders caveat burnt into a provenance strip at the foot.</li><li><strong>Deep-state permalinks</strong> — 🔗 button copies a URL reproducing theme, lens or custom layer set, colour-by, year, and slider values; all params parsed on load.</li><li><strong>Accessibility (data maps)</strong> — <code>prefers-reduced-motion</code> turns Play into discrete stepping; ARIA labels/roles/live regions; keyboard-operable chips.</li><li><strong>Compile-time data warnings</strong> — zero-match themes and ungeocoded locations reported at build; <code>list_vocab.py</code> prints per-slug event counts.</li><li><strong>Smoke-test suite</strong> — <code>scripts/test_smoke.py</code>: 23 checks over specs, compilation, emitted HTML, boundary cache, curated-data rules, tour manifest.</li><li><strong>Docs + skill brought true</strong> — schema, README, NEWFEATURES, AUDIT scorecard, and the <code>/buildmap</code> skill updated to match reality (including the <code>rosicrokians</code> filename typo and stale stats).</li></ol></div></main><footer>MAPRESEARCH — an R&amp;D project in honest, directable historical cartography. Borders are approximate; absence is absence of record; the maps say so.</footer></body></html>

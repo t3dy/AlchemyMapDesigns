@@ -1,0 +1,37 @@
+{
+  "title": "Boyle & Starkey",
+  "subtitle": "The sceptical chymist and his American tutor, 17th c.",
+  "directive": "figure map: robert-boyle, george-starkey",
+  "scope": {
+    "persons": [
+      "robert-boyle",
+      "george-starkey"
+    ],
+    "region_bbox": [
+      -12,
+      48,
+      4,
+      58
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "noir",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1650
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "George Starkey — Harvard-trained, writing as 'Eirenaeus Philalethes' — taught Robert Boyle his laboratory chymistry. Two careers that between them bridge alchemy and the Royal Society.",
+    "provenance_note": "Events involving Boyle (8) or Starkey (6). Starkey's American years fall outside the corpus's geocoding.",
+    "design_note": "Alchemical Noir: two careers half in shadow — Starkey behind the 'Philalethes' mask, Boyle's chymistry kept from print. Noir for the hidden half."
+  }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 8th Century — Map Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2ead8;--panel:#faf4e4;--ink:#2b1d10;--muted:#7a5a36;--accent:#9c2b2b;
+  --gold:#b68c28;--bd:#d8c49a;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"EB Garamond",Georgia,serif;
+  background-image:radial-gradient(ellipse at 20% 0%,#f8f0dc 0%,#f2ead8 55%,#ecdfc4 100%);}
+a{color:var(--accent);}
+header.site{padding:42px 24px 18px;text-align:center;}
+header.site h1{font-family:"Cinzel",Georgia,serif;font-size:clamp(26px,4.5vw,44px);margin:0 0 6px;letter-spacing:.04em;}
+header.site .sub{font-style:italic;color:var(--muted);font-size:17px;max-width:760px;margin:0 auto;}
+.counts{margin:14px auto 0;font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+nav.docs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:22px auto 8px;max-width:900px;}
+nav.docs a{display:block;background:var(--panel);border:1px solid var(--bd);border-radius:10px;
+  padding:10px 18px;text-decoration:none;color:var(--ink);font-size:14.5px;box-shadow:0 4px 14px rgba(60,40,10,.08);}
+nav.docs a b{font-family:"Cinzel",serif;font-size:13px;letter-spacing:.05em;color:var(--accent);display:block;}
+main{max-width:1180px;margin:0 auto;padding:10px 24px 80px;}
+section.family{margin-top:46px;}
+section.family>h2{font-family:"Cinzel",serif;font-size:22px;letter-spacing:.06em;margin:0 0 4px;
+  border-bottom:2px solid var(--bd);padding-bottom:6px;}
+section.family>.blurb{color:var(--muted);font-size:15.5px;font-style:italic;margin:6px 0 12px;max-width:840px;}
+.ideas{margin:0 0 18px;}
+details.idea{background:var(--panel);border:1px solid var(--bd);border-radius:9px;margin:6px 0;overflow:hidden;}
+details.idea summary{cursor:pointer;padding:9px 14px;font-size:14.5px;font-weight:600;list-style:none;}
+details.idea summary::before{content:"❧ ";color:var(--gold);}
+details.idea[open] summary{border-bottom:1px solid var(--bd);background:#f5edd8;}
+details.idea .body{padding:10px 16px 12px;font-size:14.5px;line-height:1.55;}
+details.idea .body p.more{margin:8px 0 0;font-size:13px;color:var(--muted);border-top:1px dashed var(--bd);padding-top:7px;}
+nav.jump{position:sticky;top:0;z-index:9;background:rgba(242,234,216,.94);backdrop-filter:blur(3px);
+  border-bottom:1px solid var(--bd);display:flex;gap:4px;justify-content:center;flex-wrap:wrap;padding:8px 10px;}
+nav.jump a{font-size:12.5px;letter-spacing:.05em;text-decoration:none;color:var(--ink);
+  border:1px solid transparent;border-radius:999px;padding:4px 11px;}
+nav.jump a:hover{border-color:var(--bd);background:var(--panel);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;}
+a.card{display:block;background:var(--panel);border:1px solid var(--bd);border-radius:12px;overflow:hidden;
+  text-decoration:none;color:var(--ink);box-shadow:0 6px 18px rgba(60,40,10,.10);transition:transform .15s,box-shadow .15s;}
+a.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(60,40,10,.18);}
+a.card svg{display:block;width:100%;height:auto;border-bottom:1px solid var(--bd);}
+a.card .pad{padding:11px 14px 13px;}
+a.card h3{font-family:"Cinzel",serif;font-size:15.5px;margin:0 0 2px;line-height:1.25;}
+a.card .st{font-size:12.5px;color:var(--muted);font-style:italic;margin:0 0 7px;line-height:1.35;}
+a.card .stats{font-size:11.5px;color:var(--muted);letter-spacing:.03em;}
+a.card .kind{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  border:1px solid var(--bd);border-radius:999px;padding:2px 8px;margin-bottom:7px;}
+.stylebadge{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);border:1px solid var(--bd);border-radius:999px;
+  padding:2px 8px;margin-bottom:7px;}
+.stylebadge .dot{width:10px;height:10px;border-radius:50%;border:2px solid;display:inline-block;}
+.designnote{border-left:3px solid var(--accent);padding:10px 14px;background:var(--panel);
+  font-size:14.5px;line-height:1.5;margin:14px 0;max-width:860px;}
+.swatches{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px auto 0;}
+.swatches .sw{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted);
+  letter-spacing:.04em;}
+.swatches .sq{width:22px;height:14px;border-radius:3px;border:1px solid var(--bd);display:inline-block;}
+.relgroup{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:8px 0;}
+.relgroup .rl{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  min-width:96px;font-weight:600;}
+a.relchip{display:inline-block;background:var(--panel);border:1px solid var(--bd);border-radius:999px;
+  padding:4px 12px;font-size:13px;text-decoration:none;color:var(--ink);}
+a.relchip:hover{border-color:var(--accent);}
+footer{color:var(--muted);text-align:center;font-size:12.5px;padding:30px 20px 40px;font-style:italic;}
+/* detail + doc pages */
+.crumb{font-size:13.5px;margin:18px 0 8px;}
+.mapframe{width:100%;height:72vh;border:1px solid var(--bd);border-radius:12px;background:#fff;
+  box-shadow:0 10px 30px rgba(60,40,10,.15);}
+.metabar{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 4px;font-size:13.5px;}
+.metabar a{background:var(--panel);border:1px solid var(--bd);border-radius:8px;padding:6px 12px;text-decoration:none;}
+.prose{background:var(--panel);border:1px solid var(--bd);border-radius:12px;padding:22px 28px;margin:16px 0;
+  line-height:1.6;font-size:16px;}
+.prose h1{font-family:"Cinzel",serif;font-size:26px;}
+.prose h2{font-family:"Cinzel",serif;font-size:19px;border-bottom:1px solid var(--bd);padding-bottom:4px;margin-top:28px;}
+.prose h3{font-size:16.5px;}
+.prose pre{background:#2b2416;color:#f0e6c8;padding:12px 14px;border-radius:8px;overflow:auto;font-size:13px;}
+.prose code{background:#ece0c2;border-radius:4px;padding:1px 5px;font-size:.9em;}
+.prose pre code{background:none;padding:0;}
+.prose table{border-collapse:collapse;width:100%;font-size:14.5px;}
+.prose th,.prose td{border:1px solid var(--bd);padding:6px 9px;text-align:left;}
+.prose th{background:#f0e5c8;font-family:"Cinzel",serif;font-size:12.5px;letter-spacing:.04em;}
+.provnote{border-left:3px solid var(--gold);padding:8px 14px;background:var(--panel);
+  font-size:14px;color:var(--muted);font-style:italic;margin:14px 0;}
+@media (prefers-reduced-motion: reduce){a.card{transition:none;}}
+</style></head><body><main><div class="crumb"><a href="index.html">← All maps</a></div><h1 style="font-family:Cinzel,serif;margin:6px 0 2px">The 8th Century</h1><p style="font-style:italic;color:var(--muted);margin:0 0 12px">Transmission of alchemical knowledge, 700–799 CE</p><iframe class="mapframe" src="../prototypes/century-08.html" title="The 8th Century" loading="lazy"></iframe><div class="metabar"><a href="../prototypes/century-08.html" target="_blank">Open full screen ↗</a><a href="../specs/generated/century-08.mapspec.json" target="_blank">View the recipe (JSON) ↗</a><span style="align-self:center;color:var(--muted)">18 events · 5 places · 9 arcs · borders c. 700</span></div><p style="font-size:16px;line-height:1.55;max-width:860px">Alchemical activity in the 8th century. Arcs trace where individual practitioners and translators carried knowledge between centres.</p><div class="designnote"><b>Design — Illuminated Manuscript.</b><p style="margin:6px 0 0">Illuminated Manuscript: the century series rotates the full six-style wardrobe, so reading the centuries in order is also a tour of the theme engine — and consecutive chapters never look alike.</p><p style="margin:8px 0 0;font-size:12.5px;color:var(--muted)"><b>Tools:</b> MapLibre GL canvas · deck.gl: ScatterplotLayer (points) · ArcLayer (transmission) · time scrubber · GeoJsonLayer (coastlines · lakes · rivers) · GeoJsonLayer (borders c. 700)</p></div><p style="font-size:13.5px;color:var(--muted)">Directive: <em>significant movements of the 8th century</em></p><div class="provnote">Transmission arcs are reconstructed from the recorded itineraries of named figures; absence of an arc reflects gaps in the record, not certainty of no contact.</div><h2 style="font-family:Cinzel,serif;font-size:19px;margin-top:26px">Browse related maps</h2><div class="relgroup"><span class="rl">Same era</span><a class="relchip" href="era-arabic.html">The Arabic Transmission</a></div><h2 style="font-family:Cinzel,serif;font-size:19px;margin-top:26px">Ideas this map is trying</h2><div class="ideas"><details class="idea" open><summary>Style as argument</summary><div class="body">Six full visual identities — Modern Atlas, Copperplate Engraving, Illuminated Manuscript, Alchemical Noir, Woodcut &amp; Rubric, Lapis &amp; Gold — and every map now <em>opens</em> in the one that suits its material: copperplate for print-culture subjects, lapis for late antiquity, noir for hidden and rejected knowledge, woodcut for scholastic polemic. Each map's page carries a design note saying why. The reader can always switch styles live — the assignment is a curatorial argument, not a lock.<p class="more">Read more: <a href="toolkit.html#7-the-theme-engine">Toolkit §7 — the theme engine</a> · <a href="manual.html#4-reading-a-data-map">Manual §4 — the six styles</a></p></div></details>
+<details class="idea"><summary>Time as accumulation</summary><div class="body">The scrubber doesn't slice time, it <em>accumulates</em> it — press Play and events pile up through the years, so centres of gravity visibly form and migrate. On journeys the same control becomes progress-through-a-life. Under reduced-motion settings Play turns into a discrete step-through: same story, no animation.<p class="more">Read more: <a href="manual.html#4-reading-a-data-map">Manual §4 — reading a data map</a></p></div></details>
+<details class="idea"><summary>Transmission arcs — knowledge in motion</summary><div class="body">Arcs connect consecutive dated events of the same named person: alchemy moving as people moved. The honesty cost is stated on every map: arcs trace <em>named figures whose itineraries survive</em>; the anonymous carriers — merchants, manuscripts, students — vastly outnumbered them, and absence of an arc is absence of record.<p class="more">Read more: <a href="manual.html#8-how-to-read-these-maps-honestly">Manual §8 — absence ≠ absence</a></p></div></details>
+<details class="idea"><summary>Period-accurate borders</summary><div class="body">Early-modern events used to float over 21st-century borders. Now a spec can say <code>historical_boundaries_year: 1560</code> and the compiler embeds approximate period polities from a locally cached, slimmed <em>historical-basemaps</em> dataset (snapped to the nearest cached year). It ships as a toggleable Borders layer — hover a line for the polity's name — and the map automatically gains a caveat: approximate, for orientation, never authority.<p class="more">Read more: <a href="toolkit.html#4-engines-cli-reference">Toolkit §4 — fetch_boundaries.py</a> · <a href="manual.html#8-how-to-read-these-maps-honestly">Manual §8 — borders are orientation, not authority</a></p></div></details></div></main><footer>MAPRESEARCH — an R&amp;D project in honest, directable historical cartography. Borders are approximate; absence is absence of record; the maps say so.</footer></body></html>

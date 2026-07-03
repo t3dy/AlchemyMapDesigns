@@ -1,0 +1,37 @@
+{
+  "title": "Operations of the Fire",
+  "subtitle": "Sublimation, calcination, fermentation",
+  "directive": "theme map: sublimation, calcination, fermentation",
+  "scope": {
+    "themes": [
+      "sublimation",
+      "calcination",
+      "fermentation"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "noir",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1200
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "theme"
+  },
+  "narrative": {
+    "intro": "Three canonical operations, three colours. Sublimation raises, calcination reduces, fermentation quickens — a working vocabulary shared from Alexandria to Amsterdam.",
+    "provenance_note": "Themes = events tagged sublimation (44), calcination (42), or fermentation (35). Colour = first matching theme. Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Alchemical Noir: three operations of fire drawn as fire — luminous points on darkness, one glowing colour per operation."
+  }
+}

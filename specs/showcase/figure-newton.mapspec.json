@@ -1,0 +1,36 @@
+{
+  "title": "Newton the Chymist",
+  "subtitle": "The private alchemy of a public natural philosopher",
+  "directive": "figure map: isaac-newton",
+  "scope": {
+    "persons": [
+      "isaac-newton"
+    ],
+    "region_bbox": [
+      -8,
+      49,
+      4,
+      56
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "noir",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1700
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Newton's million-plus words of chymical manuscript stayed private for centuries. The corpus events mark where that hidden labour surfaced — Cambridge, London, the Mint.",
+    "provenance_note": "Events involving Isaac Newton (5 in corpus). A deliberately thin map: most of Newton's alchemy is manuscript, not event.",
+    "design_note": "Alchemical Noir: a million secret words. The darkness is the point — Newton's alchemy was private for two centuries."
+  }
+}

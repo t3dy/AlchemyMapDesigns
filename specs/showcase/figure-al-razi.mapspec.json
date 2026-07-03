@@ -1,0 +1,30 @@
+{
+  "title": "Abu Bakr al-Razi",
+  "subtitle": "The physician-chymist of Rayy and Baghdad, c. 865–925",
+  "directive": "figure map: al-razi",
+  "scope": {
+    "persons": [
+      "al-razi"
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "atlas",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 900
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Al-Razi's Secret of Secrets replaced allegory with apparatus lists and procedure — the most operational text of early alchemy, from the hospitals of Rayy and Baghdad.",
+    "provenance_note": "Events involving al-Razi (13 in corpus).",
+    "design_note": "Modern Atlas: the most operational author of early alchemy — apparatus lists and procedures — deserves the plainest, most legible style."
+  }
+}

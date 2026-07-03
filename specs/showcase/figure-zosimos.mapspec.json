@@ -1,0 +1,36 @@
+{
+  "title": "Zosimos of Panopolis",
+  "subtitle": "The first alchemical author with a face, c. 300 CE",
+  "directive": "figure map: zosimos-of-panopolis",
+  "scope": {
+    "persons": [
+      "zosimos-of-panopolis"
+    ],
+    "region_bbox": [
+      20,
+      22,
+      42,
+      42
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "lapis",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 300
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "The earliest alchemist whose writings survive under his own name: visionary treatises, letters to Theosebeia, and working recipes, radiating from Greco-Roman Egypt.",
+    "provenance_note": "Events involving Zosimos (17 in corpus). Locations are where events are recorded, not a verified itinerary.",
+    "design_note": "Lapis & Gold: a visionary of late antiquity — dream-tribunals and spirit-stills — set on the deep blue of late-antique luxury pigment."
+  }
+}

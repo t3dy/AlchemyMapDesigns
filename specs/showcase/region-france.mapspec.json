@@ -1,0 +1,36 @@
+{
+  "title": "Alchemical France",
+  "subtitle": "Universities, prophecy, and the quintessence",
+  "directive": "region map: France, France/Alsace",
+  "scope": {
+    "regions": [
+      "France",
+      "France/Alsace"
+    ],
+    "region_bbox": [
+      -5,
+      42,
+      9,
+      51.5
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "woodcut",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1300
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Paris condemnations, Montpellier medicine, Rupescissa's prophetic pharmacy, Flamel's posthumous legend — France as alchemy's argumentative centre.",
+    "provenance_note": "Regions = 'France' (67 events) + 'France/Alsace' (7). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Woodcut & Rubric: Paris condemnations and university disputation — black letter, red rubric, hard edges."
+  }
+}

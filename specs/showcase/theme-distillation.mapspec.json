@@ -1,0 +1,35 @@
+{
+  "title": "The Still and the Alembic",
+  "subtitle": "Distillation across the alchemical world",
+  "directive": "theme map: distillation",
+  "scope": {
+    "themes": [
+      "distillation"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "atlas",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 900
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Distillation is alchemy's signature operation — the technique that travelled furthest and changed most hands. From late-antique Egypt through the Arabic laboratories to the Latin West, the still is the thread the whole tradition hangs on.",
+    "provenance_note": "Theme = events tagged 'distillation' (237 in corpus). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Modern Atlas: the toolkit's cleanest register for its most technical theme — distillation as apparatus and procedure, read like a lab chart."
+  }
+}

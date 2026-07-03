@@ -1,0 +1,24 @@
+{
+  "title": "The Byzantine Bridge",
+  "subtitle": "How Greek alchemy survived to be translated, 4th–15th centuries",
+  "directive": "show Byzantium's role as the bridge between Greek and Arabic alchemy",
+  "scope": {
+    "regions": ["Byzantium"],
+    "region_bbox": [19.0, 33.0, 45.0, 46.5]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "historical_boundaries_year": 800,
+      "show_modern_labels": false
+    },
+    "layers": ["points", "flows", "time-animation", "labels"],
+    "color_by": "era",
+    "legend": true
+  },
+  "narrative": {
+    "intro": "Between the Alexandrian workshops and the Baghdad translation movement stands Byzantium: Stephanus lecturing on the art for Heraclius, the compilers who bound the Greek corpus into the anthologies we still read it from, Constantinople as the manuscript reservoir that Islamic and, much later, Italian scholars drew on. Not a centre of innovation so much as the tradition's cold storage — and cold storage is transmission too.",
+    "provenance_note": "Region = 'Byzantium' (26 events in corpus). The corpus records survival and copying events more than practice; a thin map here reflects both a thin record and a tradition whose main Byzantine work was preservation. Borders shown are c. 800."
+  }
+}

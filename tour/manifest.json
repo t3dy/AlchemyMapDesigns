@@ -1,0 +1,220 @@
+{
+  "eras": [
+    {
+      "slug": "era-greco-egyptian",
+      "title": "Greco-Egyptian Alchemy",
+      "subtitle": "Late-antique Alexandria and the first alchemical writers, c. 200–600 CE",
+      "events": 42,
+      "locations": 4,
+      "arcs": 9,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "era-arabic",
+      "title": "The Arabic Transmission",
+      "subtitle": "Baghdad, Persia, and al-Andalus, 8th–12th centuries",
+      "events": 234,
+      "locations": 24,
+      "arcs": 46,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "era-latin-medieval",
+      "title": "Translation into Latin Europe",
+      "subtitle": "Toledo, Paris, and the scholastic reception, 12th–14th centuries",
+      "events": 175,
+      "locations": 27,
+      "arcs": 15,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "era-renaissance",
+      "title": "Renaissance Hermeticism",
+      "subtitle": "Florence, the Corpus Hermeticum, and the quintessence, 15th–16th centuries",
+      "events": 132,
+      "locations": 20,
+      "arcs": 25,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "era-paracelsian",
+      "title": "Paracelsian Iatrochemistry",
+      "subtitle": "Chymical medicine in the German lands, c. 1490–1610",
+      "events": 48,
+      "locations": 8,
+      "arcs": 11,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "era-english-chymistry",
+      "title": "English Chymistry",
+      "subtitle": "From Ripley to the Royal Society, 16th–17th centuries",
+      "events": 261,
+      "locations": 28,
+      "arcs": 38,
+      "missing_locations": [],
+      "theme_counts": {}
+    }
+  ],
+  "centuries": [
+    {
+      "slug": "century-08",
+      "century": 8,
+      "title": "The 8th Century",
+      "years": [
+        700,
+        799
+      ],
+      "events": 18,
+      "locations": 5,
+      "arcs": 9,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-09",
+      "century": 9,
+      "title": "The 9th Century",
+      "years": [
+        800,
+        899
+      ],
+      "events": 31,
+      "locations": 10,
+      "arcs": 12,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-10",
+      "century": 10,
+      "title": "The 10th Century",
+      "years": [
+        900,
+        999
+      ],
+      "events": 30,
+      "locations": 10,
+      "arcs": 0,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-11",
+      "century": 11,
+      "title": "The 11th Century",
+      "years": [
+        1000,
+        1099
+      ],
+      "events": 43,
+      "locations": 19,
+      "arcs": 1,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-12",
+      "century": 12,
+      "title": "The 12th Century",
+      "years": [
+        1100,
+        1199
+      ],
+      "events": 30,
+      "locations": 13,
+      "arcs": 0,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-13",
+      "century": 13,
+      "title": "The 13th Century",
+      "years": [
+        1200,
+        1299
+      ],
+      "events": 111,
+      "locations": 16,
+      "arcs": 12,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-14",
+      "century": 14,
+      "title": "The 14th Century",
+      "years": [
+        1300,
+        1399
+      ],
+      "events": 33,
+      "locations": 15,
+      "arcs": 0,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-15",
+      "century": 15,
+      "title": "The 15th Century",
+      "years": [
+        1400,
+        1499
+      ],
+      "events": 52,
+      "locations": 14,
+      "arcs": 5,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-16",
+      "century": 16,
+      "title": "The 16th Century",
+      "years": [
+        1500,
+        1599
+      ],
+      "events": 148,
+      "locations": 24,
+      "arcs": 25,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-17",
+      "century": 17,
+      "title": "The 17th Century",
+      "years": [
+        1600,
+        1699
+      ],
+      "events": 112,
+      "locations": 21,
+      "arcs": 11,
+      "missing_locations": [],
+      "theme_counts": {}
+    },
+    {
+      "slug": "century-18",
+      "century": 18,
+      "title": "The 18th Century",
+      "years": [
+        1700,
+        1799
+      ],
+      "events": 23,
+      "locations": 7,
+      "arcs": 0,
+      "missing_locations": [],
+      "theme_counts": {}
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "title": "Paracelsus in the Corpus",
+  "subtitle": "The evented footprint of Theophrastus von Hohenheim",
+  "directive": "figure map: paracelsus",
+  "scope": {
+    "persons": [
+      "paracelsus"
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "copperplate",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1530
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "The corpus's Paracelsus events — publications, appointments, condemnations. For the curated, sourced life-route, see the companion journey map.",
+    "provenance_note": "Events involving Paracelsus (14 in corpus). Complements the curated journey-paracelsus map, which is the sourced itinerary.",
+    "design_note": "Copperplate Engraving: Paracelsus's afterlife is a print phenomenon — surgery books, pamphlet wars — so the map wears the printed page."
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Alchemy Tried in the Fire",
+  "subtitle": "After Newman & Principe (2002) — Starkey, Boyle, and Helmontian laboratory practice",
+  "directive": "scholarship map: Alchemy Tried in the Fire (60 citations in collection)",
+  "scope": {
+    "persons": [
+      "george-starkey",
+      "robert-boyle",
+      "jan-van-helmont"
+    ],
+    "region_bbox": [
+      -12,
+      47,
+      8,
+      58
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "atlas",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1650
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Newman and Principe reconstructed George Starkey's laboratory notebooks to show quantitative, Helmontian chymistry behind the 'Philalethes' legend — and Boyle learning at Starkey's bench. This map plots that triangle: Helmont's Brussels, Starkey's London, Boyle's Oxford.",
+    "provenance_note": "Keyed to William R. Newman & Lawrence M. Principe, Alchemy Tried in the Fire (2002); Newman is the collection's second most-cited scholar (60 event-level citations). Scope = events involving Starkey, Boyle, or van Helmont.",
+    "design_note": "Modern Atlas: the cleanest, most quantitative of the six styles — graph-paper sensibility for a book about laboratory notebooks, mass balances, and reproducible experiment."
+  }
+}

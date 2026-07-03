@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MapSpec",
+  "description": "The contract between a builder's natural-language directive and a rendered alchemy map. Claude fills this from a directive; the generator renders it deterministically.",
+  "type": "object",
+  "required": ["title", "scope", "render", "narrative"],
+  "properties": {
+    "title": { "type": "string", "description": "Human-facing map title." },
+    "subtitle": { "type": "string" },
+    "directive": {
+      "type": "string",
+      "description": "The original natural-language request this spec was compiled from (provenance)."
+    },
+    "scope": {
+      "type": "object",
+      "description": "What gets included. Empty/omitted fields are unconstrained.",
+      "properties": {
+        "year_start": { "type": ["integer", "null"] },
+        "year_end": { "type": ["integer", "null"] },
+        "era": {
+          "type": "array",
+          "items": { "enum": ["ANTIQUITY","LATE_ANTIQUE","MEDIEVAL","RENAISSANCE","EARLY_MODERN","ENLIGHTENMENT"] }
+        },
+        "region_bbox": {
+          "type": "array",
+          "description": "[west, south, east, north] in degrees. Defines the viewport + spatial clip.",
+          "items": { "type": "number" },
+          "minItems": 4, "maxItems": 4
+        },
+        "regions": {
+          "type": "array",
+          "description": "Named regions from the data (e.g. 'Germany', 'Bohemia') as an alternative to a bbox.",
+          "items": { "type": "string" }
+        },
+        "themes": {
+          "type": "array",
+          "description": "Concept slugs from the database; an event matches if it carries any of these.",
+          "items": { "type": "string" }
+        },
+        "persons": {
+          "type": "array",
+          "description": "Person slugs to spotlight or restrict to.",
+          "items": { "type": "string" }
+        },
+        "texts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "review_status": {
+          "type": "array",
+          "description": "Only include events at/above these provenance tiers.",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "render": {
+      "type": "object",
+      "required": ["basemap", "layers"],
+      "properties": {
+        "engine": { "enum": ["maplibre", "leaflet", "d3"], "default": "maplibre" },
+        "basemap": {
+          "type": "object",
+          "properties": {
+            "style": {
+              "enum": ["atlas", "copperplate", "illuminated", "noir",
+                       "parchment", "sepia-toner", "muted-vector", "modern-osm"],
+              "default": "atlas",
+              "description": "Initial runtime theme. Legacy aliases: parchment=illuminated, sepia-toner=copperplate, muted-vector/modern-osm=atlas."
+            },
+            "historical_boundaries_year": {
+              "type": ["integer", "null"],
+              "description": "If set, embed period political boundaries for the nearest cached year (data/boundaries/, from historical-basemaps; run scripts/fetch_boundaries.py to populate). Rendered as a toggleable 'Borders' layer with an automatic provenance caveat."
+            },
+            "show_modern_labels": { "type": "boolean", "default": false }
+          }
+        },
+        "layers": {
+          "type": "array",
+          "description": "Which visual layers to draw, in order.",
+          "items": {
+            "enum": ["points", "flows", "time-animation", "heatmap", "network", "labels"]
+          }
+        },
+        "color_by": { "enum": ["region", "theme", "era", "person"], "default": "theme" },
+        "legend": { "type": "boolean", "default": true }
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "description": "Editorial framing rendered as an intro panel. provenance_note is REQUIRED: the compiler refuses to build a map that does not say where its claims come from (override with --allow-unsourced for drafts).",
+      "required": ["provenance_note"],
+      "properties": {
+        "intro": { "type": "string" },
+        "provenance_note": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

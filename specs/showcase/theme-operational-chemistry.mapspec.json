@@ -1,0 +1,35 @@
+{
+  "title": "The Working Laboratory",
+  "subtitle": "Operational chemistry: the craft behind the doctrine",
+  "directive": "theme map: operational-chemistry",
+  "scope": {
+    "themes": [
+      "operational-chemistry"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "copperplate",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1500
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "The corpus's largest single category: hands-on laboratory operation — apparatus, assay, procedure. This is alchemy as work rather than as text, and its geography is the geography of workshops, mints, and mines.",
+    "provenance_note": "Theme = events tagged 'operational-chemistry' (280 in corpus). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Copperplate Engraving: the register of the technical plate — furnaces, alembics, assay benches — for the corpus's biggest hands-on category."
+  }
+}

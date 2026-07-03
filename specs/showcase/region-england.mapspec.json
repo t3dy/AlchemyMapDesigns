@@ -1,0 +1,35 @@
+{
+  "title": "Alchemical England",
+  "subtitle": "From Ripley's verse to the Royal Society",
+  "directive": "region map: England",
+  "scope": {
+    "regions": [
+      "England"
+    ],
+    "region_bbox": [
+      -6,
+      49.5,
+      2,
+      56
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "copperplate",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1600
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "A late but intense alchemical culture: monastic verse, Tudor patents and prosecutions, Dee's library, Ashmole's antiquarianism, and the chymistry of Boyle and Newton.",
+    "provenance_note": "Region = 'England' (77 events). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Copperplate Engraving: from Ripley's printed verse to Royal Society plates, English alchemy is a print-culture story."
+  }
+}

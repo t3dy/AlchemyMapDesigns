@@ -1,0 +1,34 @@
+{
+  "title": "The Arabic Transmission",
+  "subtitle": "Baghdad, Persia, and al-Andalus, 8th–12th centuries",
+  "directive": "era showcase: The Arabic Transmission",
+  "scope": {
+    "year_start": 700,
+    "year_end": 1200,
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1000
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Greek learning is translated into Arabic and transformed — Jabir ibn Hayyan, al-Razi, the sulphur–mercury theory, the rise of distillation. Watch the weight shift east to Baghdad and Persia, then west into Muslim Spain.",
+    "provenance_note": "Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status entries); locations are event geocodes, not residences. Transmission arcs are reconstructed from the dated itineraries of named figures — absence of an arc reflects gaps in the record, not certainty of no contact.",
+    "design_note": "Illuminated Manuscript: gold-on-parchment for a corpus that lived in manuscript, from Baghdad's paper mills to al-Andalus."
+  }
+}

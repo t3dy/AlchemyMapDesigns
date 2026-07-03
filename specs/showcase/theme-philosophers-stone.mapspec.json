@@ -1,0 +1,36 @@
+{
+  "title": "The Stone Itself",
+  "subtitle": "Where the Philosopher's Stone was written about, sought, and staged",
+  "directive": "theme map: philosophers-stone, chrysopoeia",
+  "scope": {
+    "themes": [
+      "philosophers-stone",
+      "chrysopoeia"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1400
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "The lapis philosophorum as an object of writing, patronage, and performance. Every dot is a claim about the Stone; none of them is the Stone.",
+    "provenance_note": "Themes = philosophers-stone (15) and chrysopoeia (5). The analyst's category here is 'claims and representations', never efficacy. Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Illuminated Manuscript: parchment and gold for the tradition's great treasure-object; the Stone always belonged to the courtly, gilded register."
+  }
+}

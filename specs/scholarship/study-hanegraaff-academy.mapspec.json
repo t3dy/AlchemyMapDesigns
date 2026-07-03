@@ -1,0 +1,38 @@
+{
+  "title": "Esotericism and the Academy",
+  "subtitle": "After Wouter Hanegraaff (2012) — the knowledge the university rejected",
+  "directive": "scholarship map: Esotericism and the Academy (19 citations in collection)",
+  "scope": {
+    "themes": [
+      "hermeticism",
+      "magia-naturalis",
+      "prisca-theologia"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "noir",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1500
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "theme"
+  },
+  "narrative": {
+    "intro": "Hanegraaff's history is of a body of learning — Hermetic, magical, 'ancient wisdom' — that the academy first embraced, then expelled, then forgot it had expelled. The map plots where that rejected knowledge actually lived and moved while it still had a home.",
+    "provenance_note": "Keyed to Wouter J. Hanegraaff, Esotericism and the Academy (2012) — 19 event-level citations in this collection. Scope = events tagged hermeticism, magia naturalis, or prisca theologia. Thin tagging of conceptual themes (see AUDIT.md) makes this a floor, not a census.",
+    "design_note": "Alchemical Noir: luminous points on near-black — rejected knowledge as light in a darkened archive. The dark field literalizes Hanegraaff's thesis that this material was made invisible."
+  }
+}

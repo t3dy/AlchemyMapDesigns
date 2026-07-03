@@ -1,0 +1,39 @@
+{
+  "title": "Hermetic and Magical Currents",
+  "subtitle": "Hermeticism, natural magic, and the emblematic turn",
+  "directive": "theme map: hermeticism, magia-naturalis, prisca-theologia, emblem-alchemy, emblematic-alchemy",
+  "scope": {
+    "themes": [
+      "hermeticism",
+      "magia-naturalis",
+      "prisca-theologia",
+      "emblem-alchemy",
+      "emblematic-alchemy"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "lapis",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1500
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "theme"
+  },
+  "narrative": {
+    "intro": "The learned-magical penumbra of alchemy: the Corpus Hermeticum's fortunes, magia naturalis, and the emblem books that turned laboratory doctrine into images.",
+    "provenance_note": "Themes = hermeticism (13), magia-naturalis (7), prisca-theologia, emblem-alchemy, emblematic-alchemy. A thin slice — the corpus under-tags conceptual themes (see AUDIT.md). Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Lapis & Gold: Hermetic learning claimed starry, priestly authority; ultramarine and gilt make the map read like the ceiling of a chapel."
+  }
+}

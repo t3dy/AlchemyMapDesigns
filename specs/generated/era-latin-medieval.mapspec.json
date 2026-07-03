@@ -1,0 +1,34 @@
+{
+  "title": "Translation into Latin Europe",
+  "subtitle": "Toledo, Paris, and the scholastic reception, 12th–14th centuries",
+  "directive": "era showcase: Translation into Latin Europe",
+  "scope": {
+    "year_start": 1100,
+    "year_end": 1400,
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "woodcut",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1300
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "Arabic alchemy crosses into Latin Christendom through Iberian translation centres. The pseudo-Geberian Summa Perfectionis becomes the canonical Latin theory; transmutation debates enter the universities.",
+    "provenance_note": "Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status entries); locations are event geocodes, not residences. Transmission arcs are reconstructed from the dated itineraries of named figures — absence of an arc reflects gaps in the record, not certainty of no contact.",
+    "design_note": "Woodcut & Rubric: black letter and red rubric for the scholastic reception — quaestiones, condemnations, university Latin."
+  }
+}

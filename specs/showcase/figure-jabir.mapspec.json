@@ -1,0 +1,30 @@
+{
+  "title": "Jabir ibn Hayyan",
+  "subtitle": "The corpus that built Arabic alchemy, 8th–9th c.",
+  "directive": "figure map: jabir-ibn-hayyan",
+  "scope": {
+    "persons": [
+      "jabir-ibn-hayyan"
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "illuminated",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 800
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation",
+      "labels"
+    ],
+    "color_by": "region"
+  },
+  "narrative": {
+    "intro": "'Jabir' is as much a library as a man — hundreds of treatises, the sulphur–mercury theory, the science of balances. The dots trace where the corpus was written, read, and disputed.",
+    "provenance_note": "Events involving Jabir ibn Hayyan (14 in corpus). The historical Jabir is disputed; the map plots the corpus's footprint, not a biography.",
+    "design_note": "Illuminated Manuscript: the Jabirian corpus survives as manuscript culture; gold-on-parchment is its native dress."
+  }
+}

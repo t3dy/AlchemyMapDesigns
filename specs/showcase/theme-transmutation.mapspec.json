@@ -1,0 +1,35 @@
+{
+  "title": "The Great Work",
+  "subtitle": "Transmutation claims, debates, and prohibitions",
+  "directive": "theme map: transmutation",
+  "scope": {
+    "themes": [
+      "transmutation"
+    ],
+    "region_bbox": [
+      -10.0,
+      24.0,
+      60.0,
+      60.0
+    ]
+  },
+  "render": {
+    "engine": "maplibre",
+    "basemap": {
+      "style": "woodcut",
+      "show_modern_labels": false,
+      "historical_boundaries_year": 1300
+    },
+    "layers": [
+      "points",
+      "flows",
+      "time-animation"
+    ],
+    "color_by": "era"
+  },
+  "narrative": {
+    "intro": "Where transmutation was claimed, tested, defended, and banned. The map records the *debate* as much as the practice — scholastic quaestiones, papal decretals, and courtroom assays all leave dots here.",
+    "provenance_note": "Theme = events tagged 'transmutation' (240 in corpus). The map records claims and debates about transmutation, and endorses none of them. Events from the ALCHEMYTIMELINEMAP corpus (largely draft-status); locations are event geocodes, not residences. Absence on this map reflects gaps in the record.",
+    "design_note": "Woodcut & Rubric: transmutation lived in printed polemic — decretals, disputations, broadsheets. Black line and red accent give it that pamphlet-war voice."
+  }
+}
