@@ -94,6 +94,23 @@ def build_location_index(data):
 def strip_html(s):
     return re.sub(r"<[^>]+>", "", s or "").replace("&nbsp;", " ").strip()
 
+
+BASE_LABEL_CHARS = "".join(chr(c) for c in range(32, 127))  # ASCII printable — always safe
+
+
+def label_charset(*texts):
+    """The exact glyph set a map's on-canvas labels need: ASCII plus whatever
+    diacritics actually appear (Córdoba, Kraków, Třeboň…), nothing more.
+    deck.gl's TextLayer packs every requested character into one shared SDF
+    atlas — asking for a large generic Unicode range on every map (most of
+    which use none of it) starves the atlas and visibly degrades glyph
+    quality; a tight, per-map set fixes that and is also just more correct."""
+    seen = set(BASE_LABEL_CHARS)
+    for t in texts:
+        if t:
+            seen.update(t)
+    return sorted(seen)
+
 # ---------------------------------------------------------------- spec validation
 
 # Legacy schema style names map onto the four runtime themes.
@@ -438,6 +455,7 @@ def compile_spec(spec, data):
         "color_by": spec.get("render", {}).get("color_by", "theme"),
         "initial_theme": initial_theme,
         "initial_labels": bool(basemap.get("show_modern_labels", False)),
+        "label_chars": label_charset(*(p["name"] for p in point_list)),
         "boundaries": boundaries,
         "basegeo": load_basegeo(),
         "relief": relief,
@@ -698,7 +716,7 @@ const RELIEF_STYLE={
   copperplate:{desaturate:0.55, tint:[214,182,140]},
   illuminated:{desaturate:0.25, tint:[255,225,170]},
   noir:       {desaturate:0.85, tint:[130,140,175]},
-  woodcut:    {desaturate:0.92, tint:[150,120,90]},
+  woodcut:    {desaturate:0.92, tint:[205,200,190]},
   lapis:      {desaturate:0.65, tint:[150,180,230]},
 };
 function reliefLayer(){
@@ -762,10 +780,12 @@ function makeLayers(){
 }
 function hexish(h){ const m=h.replace("#",""); return [parseInt(m.substr(0,2),16),parseInt(m.substr(2,2),16),parseInt(m.substr(4,2),16)]; }
 // Place names carry diacritics (Córdoba, Kraków, Třeboň…) that deck.gl's
-// TextLayer default glyph set (plain ASCII) silently drops. Cover ASCII +
-// Latin-1 Supplement + Latin Extended-A/B so accented labels render whole.
-function charRange(a,b){ return Array.from({length:b-a+1},(_,i)=>String.fromCodePoint(a+i)); }
-const LABEL_CHARS=[...charRange(32,126),...charRange(160,591)];
+// TextLayer default glyph set (plain ASCII) silently drops. DATA.label_chars
+// is the EXACT set this map's labels need (computed at build time from the
+// real point names) — a big generic Unicode range here would pack far more
+// glyphs into the shared SDF atlas than any single map uses, visibly
+// degrading glyph quality for everyone. Keep this tight.
+const LABEL_CHARS=DATA.label_chars;
 
 function render(){ overlay.setProps({layers:makeLayers()}); }
 

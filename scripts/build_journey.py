@@ -166,9 +166,11 @@ function basegeoLayers(){
 
 // Place names carry diacritics (Kraków, Třeboň…) that deck.gl's TextLayer
 // default glyph set (plain ASCII) silently drops; "auto" is not honoured by
-// this deck.gl build, so cover ASCII + Latin-1 Supplement + Latin Extended-A/B.
-function charRange(a,b){ return Array.from({length:b-a+1},(_,i)=>String.fromCodePoint(a+i)); }
-const LABEL_CHARS=[...charRange(32,126),...charRange(160,591)];
+// this deck.gl build. J.label_chars is the EXACT set this journey's stops
+// need (computed at build time) — a big generic Unicode range would pack far
+// more glyphs into the shared SDF atlas than any single map uses, visibly
+// degrading glyph quality. Keep this tight.
+const LABEL_CHARS=J.label_chars;
 function lerp(a,b,t){return [a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t];}
 function isUncertain(s){return s && (s.evidence==="inferred"||s.evidence==="approximate");}
 function legUncertain(s){return s && (s.leg_evidence==="inferred"||s.leg_evidence==="approximate");}
@@ -352,6 +354,8 @@ def main():
     lons = [s["lon"] for s in J["stops"]]
     lats = [s["lat"] for s in J["stops"]]
     J["relief"] = load_relief_crop([min(lons), min(lats), max(lons), max(lats)], pad_frac=0.35)
+    from build_map import label_charset
+    J["label_chars"] = label_charset(*(s["place"] for s in J["stops"]))
     errors = validate_journey(J)
     if errors:
         for e in errors:

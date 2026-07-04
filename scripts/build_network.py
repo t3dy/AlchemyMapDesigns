@@ -82,9 +82,11 @@ const TYPE_COLORS={ "patron-of":[176,92,53],"collaborated":[60,130,100],"cited":
 function tc(t){return TYPE_COLORS[t]||[120,120,120];}
 // Figure names may carry diacritics that deck.gl's TextLayer default glyph
 // set (plain ASCII) silently drops; "auto" is not honoured by this deck.gl
-// build, so cover ASCII + Latin-1 Supplement + Latin Extended-A/B explicitly.
-function charRange(a,b){ return Array.from({length:b-a+1},(_,i)=>String.fromCodePoint(a+i)); }
-const LABEL_CHARS=[...charRange(32,126),...charRange(160,591)];
+// build. NET.label_chars is the EXACT set every subject's node labels need
+// (computed at build time, across all subjects since one atlas serves the
+// whole page) — a big generic Unicode range would pack far more glyphs into
+// the shared SDF atlas than are ever used, visibly degrading glyph quality.
+const LABEL_CHARS=NET.label_chars;
 
 const STATE={subjectIdx:0, theme:"atlas", survive:false, sel:null};
 let map, overlay, S, nodeById;
@@ -283,10 +285,12 @@ def main():
             print(f"  {'warning' if args.allow_unsourced else 'DATA ERROR'}: {e}")
         if not args.allow_unsourced:
             raise SystemExit(2)
+    from build_map import label_charset
     for s in net["subjects"]:
         lons = [n["lon"] for n in s["nodes"]]
         lats = [n["lat"] for n in s["nodes"]]
         s["relief"] = load_relief_crop([min(lons), min(lats), max(lons), max(lats)], pad_frac=0.35)
+    net["label_chars"] = label_charset(*(n["label"] for s in net["subjects"] for n in s["nodes"]))
     out = TEMPLATE.replace("__DATA__", json.dumps(net, ensure_ascii=False))
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)
     Path(args.out).write_text(out, encoding="utf-8")

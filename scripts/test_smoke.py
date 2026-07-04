@@ -9,6 +9,7 @@ sound, and the curated journey/network data passes its evidence rules.
 Usage:  python scripts/test_smoke.py     (exit 0 = all pass)
 """
 import json
+import re
 import sys
 import traceback
 from pathlib import Path
@@ -57,6 +58,15 @@ def html_is_sound(out, expect_boundaries=None, expect_relief=None):
     if expect_relief:
         assert '"relief": {' in out or '"relief":{' in out, "relief crop not embedded"
         assert "data:image/jpeg;base64," in out, "relief image not embedded as a data URI"
+    # labels: characterSet must be the exact per-map glyph set, not a blanket
+    # ~500-char Unicode range — a real user-visible bug (reported: distorted
+    # city labels) traced to overloading deck.gl's shared SDF font atlas by
+    # requesting hundreds of unused glyphs on every map regardless of need.
+    # 'ǅ' (Latin Extended-B) sat inside the old blanket 32-591 codepoint range
+    # and can't appear in any real label here — its presence means the fix
+    # regressed back to embedding everything instead of what's actually used.
+    assert '"label_chars": [' in out, "label_chars not embedded — labels will fall back to a bloated character set"
+    assert "ǅ" not in out, "label_chars looks bloated again — a blanket Unicode range crept back in"
     assert len(out.encode("utf-8")) < MAX_PROTO_BYTES, f"file too large ({len(out)} bytes) — relief crop may not be downsampled"
     # mobile layout: #panel/#controls (data maps) are independently absolutely-
     # positioned corner boxes with fixed pixel widths — verified by hand in a
@@ -133,6 +143,26 @@ def main():
         assert bm.load_basegeo(), "load_basegeo() returned nothing"
     check("base geography cache", basegeo)
 
+    # ---- relief theme tints: no channel should dominate enough to read as
+    # a brown/sepia wash where a neutral or cool tone was intended (reported:
+    # the woodcut theme's terrain looked "too brown" — traced to a tint whose
+    # red channel was ~1.7x its blue channel at 92% desaturation, which at
+    # that desaturation level is essentially "grayscale image times tint
+    # color" with almost nothing else showing through) ----
+    def relief_tints():
+        template = bm.TEMPLATE
+        m = re.search(r"const RELIEF_STYLE=\{(.*?)\};", template, re.S)
+        assert m, "RELIEF_STYLE block not found in template"
+        entries = re.findall(r"(\w+):\s*\{desaturate:([\d.]+), tint:\[(\d+), ?(\d+), ?(\d+)\]\}", m.group(1))
+        found = {name: (int(r), int(g), int(b)) for name, _d, r, g, b in entries}
+        max_channel_ratio = {"atlas": 1.05, "woodcut": 1.15}  # near-neutral themes only
+        for theme, cap in max_channel_ratio.items():
+            assert theme in found, f"couldn't parse RELIEF_STYLE.{theme} from template"
+            r, g, b = found[theme]
+            ratio = max(r, g, b) / max(1, min(r, g, b))
+            assert ratio <= cap, f"{theme} relief tint {(r, g, b)} skews too far from neutral (ratio {ratio:.2f} > {cap})"
+    check("relief theme tints stay true to their register", relief_tints)
+
     # ---- relief master cache: present, plausible, slim ----
     def relief_cache():
         f = ROOT / "data" / "relief" / "world_relief.jpg"
@@ -158,6 +188,8 @@ def main():
             if bm.RELIEF_PATH.exists():
                 assert '"relief": {' in out or '"relief":{' in out, f"{p.name}: relief cache present but no crop embedded"
             assert len(out.encode("utf-8")) < MAX_PROTO_BYTES, f"{p.name}: file too large ({len(out)} bytes)"
+            assert '"label_chars": [' in out, f"{p.name}: label_chars not embedded"
+            assert "ǅ" not in out, f"{p.name}: label_chars looks bloated again — a blanket Unicode range crept back in"
     check("journey/network prototypes embed geography", curated_protos)
 
     # ---- journey prototypes stack #ctl/.legend/#doubt/#story on mobile ----
